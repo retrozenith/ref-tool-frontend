@@ -216,9 +216,7 @@
 
 <script>
   const STATUS_API_URL = 'https://ref-tool-worker.florianvictorcristea.workers.dev/api/status';
-  const CHECK_INTERVAL = 60000; // Check every 60 seconds
   
-  let statusCheckInterval: number;
   let lastStatusData: any = null;
 
   interface SystemStatus {
@@ -370,19 +368,7 @@
   if (typeof window !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
       setupStatusWidget();
-      checkSystemStatus();
-      
-      // Periodic check
-      statusCheckInterval = window.setInterval(() => {
-        checkSystemStatus();
-      }, CHECK_INTERVAL);
-    });
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-      if (statusCheckInterval) {
-        clearInterval(statusCheckInterval);
-      }
+      checkSystemStatus(); // Check once on load
     });
   }
 </script>
