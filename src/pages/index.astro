@@ -138,12 +138,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         width: 100%;
         text-align: center;
         margin-bottom: clamp(1rem, 2vw, 2rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
 
       .logo {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 1.5rem;
+        width: 120px;
+        height: 120px;
+        margin: 2rem auto;
         background: white;
         border-radius: 16px;
         display: flex;
@@ -151,12 +155,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         justify-content: center;
         box-shadow: var(--shadow-lg);
         padding: 0.5rem;
+        overflow: hidden;
       }
 
       .logo-icon {
         width: 100%;
         height: 100%;
+        display: block;
+        object-fit: contain;
       }
+
 
       h1 {
         margin: 0 0 0.75rem;
