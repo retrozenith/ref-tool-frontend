@@ -69,11 +69,98 @@ import '../styles/components.css';
     </main>
 
     <script>
+      import { TEAMS_LIST, filterTeams } from '../teams';
+
       const API_URL = 'https://ref-tool-worker.florianvictorcristea.workers.dev/api/generate-report';
       const form = document.getElementById('reportForm');
       const submitBtn = document.getElementById('submitBtn');
       const statusBadge = document.getElementById('statusBadge');
       const ageCategory = document.getElementById('ageCategory');
+
+      // Autocomplete functionality
+      function setupAutocomplete(inputId: string, listId: string) {
+        const input = document.getElementById(inputId) as HTMLInputElement;
+        const list = document.getElementById(listId) as HTMLDivElement;
+        if (!input || !list) return;
+
+        let selectedIndex = -1;
+
+        input.addEventListener('input', () => {
+          const query = input.value;
+          const matches = filterTeams(query);
+          
+          if (query.trim() === '' || matches.length === 0) {
+            list.classList.remove('active');
+            list.innerHTML = '';
+            selectedIndex = -1;
+            return;
+          }
+
+          const maxResults = 10;
+          const displayMatches = matches.slice(0, maxResults);
+          
+          list.innerHTML = displayMatches
+            .map((team, index) => `<div class="autocomplete-item" data-index="${index}">${team}</div>`)
+            .join('');
+          
+          list.classList.add('active');
+          selectedIndex = -1;
+        });
+
+        input.addEventListener('keydown', (e) => {
+          const items = list.querySelectorAll('.autocomplete-item');
+          if (items.length === 0) return;
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex + 1) % items.length;
+            updateSelection(items, selectedIndex);
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = selectedIndex <= 0 ? items.length - 1 : selectedIndex - 1;
+            updateSelection(items, selectedIndex);
+          } else if (e.key === 'Enter' && selectedIndex >= 0) {
+            e.preventDefault();
+            (items[selectedIndex] as HTMLDivElement).click();
+          } else if (e.key === 'Escape') {
+            list.classList.remove('active');
+            list.innerHTML = '';
+            selectedIndex = -1;
+          }
+        });
+
+        list.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          if (target.classList.contains('autocomplete-item')) {
+            input.value = target.textContent || '';
+            list.classList.remove('active');
+            list.innerHTML = '';
+            selectedIndex = -1;
+          }
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!input.contains(e.target as Node) && !list.contains(e.target as Node)) {
+            list.classList.remove('active');
+            list.innerHTML = '';
+            selectedIndex = -1;
+          }
+        });
+
+        function updateSelection(items: NodeListOf<Element>, index: number) {
+          items.forEach((item, i) => {
+            if (i === index) {
+              item.classList.add('selected');
+              item.scrollIntoView({ block: 'nearest' });
+            } else {
+              item.classList.remove('selected');
+            }
+          });
+        }
+      }
+
+      setupAutocomplete('team_1', 'autocomplete_team_1');
+      setupAutocomplete('team_2', 'autocomplete_team_2');
 
       const updateFormFields = (category) => {
         const u15Section = document.getElementById('u15Section');
