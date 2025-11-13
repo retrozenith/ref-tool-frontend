@@ -200,3 +200,6 @@ dist
 
 ### Astro ###
 .astro/
+
+### Version Control ###
+.git-hash

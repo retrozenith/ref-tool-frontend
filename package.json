@@ -27,7 +27,7 @@
 	},
 	"scripts": {
 		"astro": "astro",
-		"build": "node scripts/get-git-hash.js > .git-hash && astro build",
+		"build": "node scripts/get-git-hash.mjs > .git-hash && astro build",
 		"cf-typegen": "wrangler types",
 		"check": "astro build && tsc && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
