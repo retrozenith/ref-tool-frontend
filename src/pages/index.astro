@@ -1,7 +1,16 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import Logo from "../components/Logo.astro";
+import BasicInfoSection from "../components/BasicInfoSection.astro";
+import MatchInfoSection from "../components/MatchInfoSection.astro";
+import U15Section from "../components/U15Section.astro";
+import ErrorDisplay from "../components/ErrorDisplay.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+import '../styles/main.css';
+import '../styles/components.css';
 ---
 
 <!doctype html>
@@ -9,625 +18,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
-
-      /* Light theme (default) */
-      :root,
-      [data-theme="light"] {
-        --ui-background: #f5f7fa;
-        --ui-card: #ffffff;
-        --ui-card-hover: #fafbfc;
-        --ui-primary: #1e4976;
-        --ui-primary-hover: #163756;
-        --ui-primary-soft: #e8f0f8;
-        --ui-accent: #0d99ff;
-        --ui-accent-hover: #0b7fd6;
-        --ui-border: #dce2eb;
-        --ui-text: #1a2332;
-        --ui-text-secondary: #4a5568;
-        --ui-muted: #64748b;
-        --ui-success: #10b981;
-        --ui-warning: #f59e0b;
-        --ui-error: #ef4444;
-        --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Dark theme */
-      [data-theme="dark"] {
-        --ui-background: #000000;
-        --ui-card: #0a0e1a;
-        --ui-card-hover: #0f1421;
-        --ui-primary: #60a5fa;
-        --ui-primary-hover: #3b82f6;
-        --ui-primary-soft: #1e3a5f;
-        --ui-accent: #38bdf8;
-        --ui-accent-hover: #0ea5e9;
-        --ui-border: #1a2332;
-        --ui-text: #f1f5f9;
-        --ui-text-secondary: #cbd5e1;
-        --ui-muted: #94a3b8;
-        --ui-success: #34d399;
-        --ui-warning: #fbbf24;
-        --ui-error: #f87171;
-        --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
-      }
-
-      /* Auto dark mode based on system preference */
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-          --ui-background: #000000;
-          --ui-card: #0a0e1a;
-          --ui-card-hover: #0f1421;
-          --ui-primary: #60a5fa;
-          --ui-primary-hover: #3b82f6;
-          --ui-primary-soft: #1e3a5f;
-          --ui-accent: #38bdf8;
-          --ui-accent-hover: #0ea5e9;
-          --ui-border: #1a2332;
-          --ui-text: #f1f5f9;
-          --ui-text-secondary: #cbd5e1;
-          --ui-muted: #94a3b8;
-          --ui-success: #34d399;
-          --ui-warning: #fbbf24;
-          --ui-error: #f87171;
-          --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
-          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
-          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
-          --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
-        }
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        overflow-x: hidden;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        min-height: 100vh;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        background: var(--ui-background);
-        color: var(--ui-text);
-        display: flex;
-        flex-direction: column;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        overflow-x: hidden;
-      }
-
-      main {
-        flex: 1;
-        width: 100%;
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: clamp(1.5rem, 3vw, 2.5rem);
-      }
-
-      .container {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .header-section {
-        width: 100%;
-        text-align: center;
-        margin-bottom: clamp(1rem, 2vw, 2rem);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .logo {
-        width: 120px;
-        height: 120px;
-        margin: 2rem auto;
-        background: white;
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: var(--shadow-lg);
-        padding: 0.5rem;
-        overflow: hidden;
-      }
-
-      .logo-icon {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: contain;
-      }
-
-
-      h1 {
-        margin: 0 0 0.75rem;
-        font-size: clamp(1.75rem, 4vw, 2.5rem);
-        font-weight: 700;
-        color: var(--ui-primary);
-        letter-spacing: -0.02em;
-        line-height: 1.2;
-      }
-
-      .subtitle {
-        margin: 0;
-        font-size: clamp(0.95rem, 2vw, 1.125rem);
-        color: var(--ui-text-secondary);
-        line-height: 1.6;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .form-section {
-        width: 100%;
-        background: var(--ui-card);
-        border-radius: clamp(12px, 2vw, 16px);
-        box-shadow: var(--shadow-sm);
-        border: 1px solid var(--ui-border);
-        overflow: hidden;
-      }
-
-      .section-divider {
-        border-bottom: 1px solid var(--ui-border);
-      }
-
-      .section-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .section-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        background: var(--ui-primary-soft);
-        border-radius: 8px;
-        flex-shrink: 0;
-      }
-
-      .section-icon svg {
-        width: 16px;
-        height: 16px;
-        stroke: var(--ui-primary);
-      }
-
-      .section-title {
-        margin: 0;
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: var(--ui-text);
-      }
-
-      .form-header {
-        padding: clamp(1.5rem, 4vw, 2rem);
-      }
-
-      .status-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        border-radius: 999px;
-        background: var(--ui-primary-soft);
-        color: var(--ui-primary);
-        font-weight: 600;
-        font-size: 0.875rem;
-        margin-bottom: 1rem;
-        transition: all 0.2s ease;
-      }
-
-      .status-badge::before {
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: currentColor;
-        animation: pulse 2s ease-in-out infinite;
-      }
-
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-      }
-
-      @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-
-      h2 {
-        margin: 0 0 0.5rem;
-        font-size: clamp(1.5rem, 3vw, 1.875rem);
-        font-weight: 700;
-        color: var(--ui-primary);
-        letter-spacing: -0.01em;
-      }
-
-      .form-description {
-        margin: 0;
-        color: var(--ui-muted);
-        line-height: 1.6;
-        font-size: 0.9375rem;
-      }
-
-      .form-section-content {
-        padding: clamp(1.5rem, 4vw, 2rem);
-        display: grid;
-        gap: clamp(1rem, 2vw, 1.25rem);
-      }
-
-      .form-section-content.muted {
-        background: color-mix(in srgb, var(--ui-card) 70%, var(--ui-background) 30%);
-      }
-
-      form {
-        display: contents;
-      }
-
-      .form-row {
-        display: grid;
-        gap: clamp(1rem, 2vw, 1.25rem);
-      }
-
-      @media (min-width: 640px) {
-        .form-row.two-col {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .form-section-content {
-          padding: clamp(2rem, 4vw, 2.5rem);
-        }
-      }
-
-      label {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        font-weight: 600;
-        font-size: 0.9375rem;
-        color: var(--ui-text);
-      }
-
-      label .label-text {
-        display: flex;
-        align-items: center;
-      }
-
-      label .required {
-        color: var(--ui-error);
-        margin-left: 0.25rem;
-        font-size: 1em;
-      }
-
-      input,
-      select {
-        width: 100%;
-        border-radius: 12px;
-        border: 1.5px solid var(--ui-border);
-        padding: 0.875rem 1rem;
-        font-size: 1rem;
-        font-family: inherit;
-        background: var(--ui-card);
-        color: var(--ui-text);
-        transition: all 0.2s ease;
-        appearance: none;
-      }
-
-      input:hover,
-      select:hover {
-        border-color: var(--ui-accent);
-      }
-
-      input:focus,
-      select:focus {
-        outline: none;
-        border-color: var(--ui-accent);
-        box-shadow: 0 0 0 3px rgba(13, 153, 255, 0.1);
-      }
-
-      input::placeholder {
-        color: var(--ui-muted);
-        opacity: 0.6;
-      }
-
-      select {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-        background-position: right 0.75rem center;
-        background-repeat: no-repeat;
-        background-size: 1.5em 1.5em;
-        padding-right: 2.75rem;
-        cursor: pointer;
-      }
-
-      .button-group {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: clamp(0.5rem, 1vw, 1rem);
-      }
-
-      button {
-        width: 100%;
-        border: none;
-        border-radius: 12px;
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: inherit;
-        background: linear-gradient(135deg, var(--ui-primary), var(--ui-accent));
-        color: #ffffff;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: var(--shadow-md);
-        position: relative;
-        overflow: hidden;
-      }
-
-      button:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-      }
-
-      button:active:not(:disabled) {
-        transform: translateY(0);
-      }
-
-      button:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-
-      button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-      }
-
-      button:hover:not(:disabled)::before {
-        left: 100%;
-      }
-
-      @media (min-width: 640px) {
-        button {
-          width: auto;
-          min-width: 200px;
-        }
-      }
-
-      .status-message {
-        padding: 1rem;
-        border-radius: 12px;
-        font-size: 0.9375rem;
-        font-weight: 500;
-        text-align: center;
-        display: none;
-      }
-
-      .status-message.visible {
-        display: block;
-      }
-
-      .status-message.success {
-        background: rgba(16, 185, 129, 0.1);
-        color: var(--ui-success);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-      }
-
-      .status-message.error {
-        background: rgba(239, 68, 68, 0.1);
-        color: var(--ui-error);
-        border: 1px solid rgba(239, 68, 68, 0.2);
-      }
-
-      .theme-toggle {
-        position: fixed;
-        top: 1.5rem;
-        right: 1.5rem;
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        border: 1px solid var(--ui-border);
-        background: var(--ui-card);
-        color: var(--ui-text);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: var(--shadow-lg);
-        transition: all 0.2s ease;
-        z-index: 1000;
-        padding: 0;
-      }
-
-      .theme-toggle:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-xl);
-        background: var(--ui-card-hover);
-      }
-
-      .theme-toggle:active {
-        transform: translateY(0);
-      }
-
-      .theme-toggle svg {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-      }
-
-      .theme-toggle .icon-sun {
-        display: none;
-      }
-
-      .theme-toggle .icon-moon {
-        display: block;
-      }
-
-      [data-theme="dark"] .theme-toggle .icon-sun {
-        display: block;
-      }
-
-      [data-theme="dark"] .theme-toggle .icon-moon {
-        display: none;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) .theme-toggle .icon-sun {
-          display: block;
-        }
-
-        :root:not([data-theme="light"]) .theme-toggle .icon-moon {
-          display: none;
-        }
-      }
-
-      @media (max-width: 639px) {
-        .theme-toggle {
-          top: 1rem;
-          right: 1rem;
-          width: 48px;
-          height: 48px;
-          border-radius: 10px;
-        }
-
-        .theme-toggle svg {
-          width: 22px;
-          height: 22px;
-        }
-      }
-
-      @media (max-width: 374px) {
-        .theme-toggle {
-          top: 0.75rem;
-          right: 0.75rem;
-          width: 44px;
-          height: 44px;
-        }
-
-        .theme-toggle svg {
-          width: 20px;
-          height: 20px;
-        }
-      }
-
-      footer {
-        margin-top: auto;
-      }
-
-      @media (max-width: 639px) {
-        main {
-          padding: 1.5rem 1rem;
-        }
-
-        .form-section {
-          padding: 1.5rem;
-        }
-
-        .logo {
-          width: 70px;
-          height: 70px;
-          margin-bottom: 1rem;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
-      }
-
-      @media print {
-        body {
-          background: white;
-        }
-
-        .form-section {
-          box-shadow: none;
-          border: 1px solid #000;
-        }
-
-        button,
-        .theme-toggle {
-          display: none;
-        }
-      }
-    </style>
   </head>
   <body>
-    <button class="theme-toggle" id="themeToggle" aria-label="Comutare temă">
-      <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-      <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-      </svg>
-    </button>
+    <ThemeToggle />
 
     <main>
       <div class="container">
         <div class="header-section">
-          <div class="logo" aria-hidden="true">
-            <svg class="logo-icon" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg">
-              <path fill="rgb(235,53,56)" d="M 663.84 382.243 C 678.654 387.361 772.078 384.708 794.616 384.73 L 1066.9 384.679 C 1087.56 384.613 1112.17 385.342 1132.43 384.503 C 1185.81 382.292 1176.86 420.001 1176.94 458.021 C 1195.71 456.754 1214.63 455.963 1233.43 454.84 C 1237.73 453.77 1261.53 453.464 1268.12 453.104 C 1278 452.97 1286.27 452.522 1296.07 451.816 L 1296.31 471.657 C 1315.6 470.149 1345.26 469.551 1362.88 466.891 C 1362.37 460.063 1361.95 453.23 1361.62 446.391 C 1368.74 446.19 1375.86 446.084 1382.98 446.072 C 1405.09 445.605 1429.94 443.443 1452.21 442.149 L 1594.09 433.674 C 1621.92 431.967 1651.42 429.655 1679.19 428.776 C 1681.58 458.088 1683.78 487.416 1685.79 516.757 C 1686.94 533.12 1688.89 553.052 1689.21 569.157 C 1585.14 597.023 1479.33 623.738 1375.71 652.517 C 1407.3 765.139 1381.43 871.59 1292.08 950.492 C 1292.69 950.753 1293.29 951.029 1293.9 951.275 C 1302.01 954.523 1315.03 952.467 1323.91 952.273 C 1346.09 951.786 1426.41 949.32 1443.06 954.745 C 1451.32 957.435 1457.2 961.981 1460.94 969.908 C 1463.64 975.618 1464.21 981.585 1464.43 987.802 C 1465.56 1020.1 1464.29 1052.81 1464.28 1085.16 L 1464.11 1293.7 L 1464.16 1559.63 C 1464.29 1610.51 1464.17 1661.44 1464.48 1712.33 C 1464.66 1741.49 1463.02 1762 1427.07 1762.2 C 1371.54 1762.51 1316 1762.32 1260.46 1762.2 L 1045.94 1762.66 L 902.279 1762.38 C 873.264 1762.46 844.081 1762.73 815.214 1762.13 C 805.11 1761.92 788.621 1750.63 787.67 1741.01 C 784.252 1706.37 785.868 1665.78 785.869 1631.11 L 785.869 1336.24 C 786.026 1302 785.885 1267.77 785.448 1233.53 C 785.302 1221.41 785.733 1208.93 785.515 1196.83 C 785.456 1193.55 785.02 1193.98 782.819 1192.23 C 739.527 1214.89 697.317 1240.24 654.188 1263.31 C 635.166 1272.94 615.976 1286.99 596.296 1294.84 C 563.964 1307.74 548.998 1266.99 537.399 1246.18 L 497.163 1173.4 L 364.057 929.17 L 265.302 747.946 C 249.911 719.754 234.225 690.899 218.841 662.724 C 211.628 649.513 216.087 628.772 229.687 620.798 C 242.63 613.209 256.505 605.658 269.989 598.184 L 355.884 550.552 L 631.58 397.259 C 643.869 387.085 648.495 386.357 663.84 382.243 z"/>
-              <path fill="rgb(239,240,241)" d="M 945.016 952.533 C 1052.58 1035.87 1186.11 1037.71 1292.08 950.492 C 1292.69 950.753 1293.29 951.029 1293.9 951.275 C 1302.01 954.523 1315.03 952.467 1323.91 952.273 C 1346.09 951.786 1426.41 949.32 1443.06 954.745 C 1451.32 957.435 1457.2 961.981 1460.94 969.908 C 1463.64 975.618 1464.21 981.585 1464.43 987.802 C 1465.56 1020.1 1464.29 1052.81 1464.28 1085.16 L 1464.11 1293.7 L 1464.16 1559.63 C 1464.29 1610.51 1464.17 1661.44 1464.48 1712.33 C 1464.66 1741.49 1463.02 1762 1427.07 1762.2 C 1371.54 1762.51 1316 1762.32 1260.46 1762.2 L 1045.94 1762.66 L 902.279 1762.38 C 873.264 1762.46 844.081 1762.73 815.214 1762.13 C 805.11 1761.92 788.621 1750.63 787.67 1741.01 C 784.252 1706.37 785.868 1665.78 785.869 1631.11 L 785.869 1336.24 C 786.026 1302 785.885 1267.77 785.448 1233.53 C 785.302 1221.41 785.733 1208.93 785.515 1196.83 C 785.456 1193.55 785.02 1193.98 782.819 1192.23 L 784.748 1190.7 C 786.592 1186.89 785.557 1168.68 785.452 1163.51 C 786.307 1152.94 785.618 1129.8 785.58 1118.42 L 785.21 1028.58 C 785.137 1009.85 781.545 977.815 794.297 963.808 C 798.703 958.985 804.474 955.619 810.841 954.161 C 818.763 952.374 838.048 953.459 847.005 953.163 C 877.464 952.153 913.902 954.779 943.753 952.632 L 945.016 952.533 z"/>
-              <path fill="rgb(34,32,33)" d="M 1346.37 1353.49 L 1381.52 1353.7 C 1381.32 1366.8 1381.37 1379.91 1381.68 1393.01 L 911.5 1392.98 L 872.934 1392.97 L 872.909 1353.73 L 1346.37 1353.49 z"/>
-              <path fill="rgb(34,32,33)" d="M 872.851 1254.98 L 1381.72 1254.98 C 1381.12 1267.93 1381.42 1280.63 1381.6 1293.59 C 1378.1 1294.47 1350.39 1294.13 1344.7 1294.12 L 1258.85 1293.99 L 872.904 1294.09 L 872.851 1254.98 z"/>
-              <path fill="rgb(34,32,33)" d="M 1330.4 1452.49 C 1347.44 1452.73 1364.49 1452.67 1381.53 1452.31 C 1381.25 1465.26 1381.21 1478.22 1381.42 1491.17 C 1328.85 1491.82 1275.3 1491.33 1222.67 1491.33 L 926.5 1491.26 C 908.642 1491.2 890.785 1491.25 872.928 1491.41 L 872.89 1452.71 C 927.874 1453.56 985.295 1452.69 1040.5 1452.71 L 1330.4 1452.49 z"/>
-              <path fill="rgb(34,32,33)" d="M 872.665 1156.04 L 1181.51 1155.96 C 1181.16 1169 1181.23 1182.05 1181.71 1195.08 C 1148.56 1196.01 1110.7 1195.16 1077.28 1195.16 L 872.71 1195.16 C 872.893 1182.26 872.701 1168.97 872.665 1156.04 z"/>
-              <path fill="rgb(34,32,33)" d="M 872.848 1551.16 L 1156.91 1551.08 L 1156.73 1590.1 L 872.951 1590.28 L 872.848 1551.16 z"/>
-              <path fill="rgb(34,32,33)" d="M 1382.98 446.072 C 1405.09 445.605 1429.94 443.443 1452.21 442.149 L 1594.09 433.674 C 1621.92 431.967 1651.42 429.655 1679.19 428.776 C 1681.58 458.088 1683.78 487.416 1685.79 516.757 C 1686.94 533.12 1688.89 553.052 1689.21 569.157 C 1585.14 597.023 1479.33 623.738 1375.71 652.517 C 1407.3 765.139 1381.43 871.59 1292.08 950.492 C 1186.11 1037.71 1052.58 1035.87 945.016 952.533 C 908.707 921.841 883.099 888.339 865.415 844.191 C 859.984 844.989 854.07 845.253 848.582 845.365 C 822.43 845.908 797.179 835.807 778.617 817.377 C 759.965 799.1 749.416 774.11 749.332 747.995 C 749.243 720.828 760.09 694.767 779.429 675.686 C 803.963 651.459 829.454 645.523 862.551 645.865 C 894.99 555.58 982.178 481.186 1077.49 466.228 C 1108.61 461.345 1145.14 460.204 1176.94 458.021 C 1195.71 456.754 1214.63 455.963 1233.43 454.84 C 1237.73 453.77 1261.53 453.464 1268.12 453.104 C 1278 452.97 1286.27 452.522 1296.07 451.816 L 1296.31 471.657 C 1315.6 470.149 1345.26 469.551 1362.88 466.891 C 1362.37 460.063 1361.95 453.23 1361.62 446.391 C 1368.74 446.19 1375.86 446.084 1382.98 446.072 z"/>
-              <path fill="rgb(239,240,241)" d="M 1361.62 446.391 C 1368.74 446.19 1375.86 446.084 1382.98 446.072 C 1382.38 470.761 1385.92 503.995 1387.15 529.584 C 1358.62 531.028 1330.1 532.699 1301.6 534.596 C 1284.88 535.616 1266.54 536.188 1250.08 538.028 L 1246.02 454.825 L 1233.43 454.84 C 1237.73 453.77 1261.53 453.464 1268.12 453.104 C 1278 452.97 1286.27 452.522 1296.07 451.816 L 1296.31 471.657 C 1315.6 470.149 1345.26 469.551 1362.88 466.891 C 1362.37 460.063 1361.95 453.23 1361.62 446.391 z"/>
-              <path fill="rgb(34,32,33)" d="M 1268.12 453.104 C 1278 452.97 1286.27 452.522 1296.07 451.816 L 1296.31 471.657 C 1315.6 470.149 1345.26 469.551 1362.88 466.891 C 1362.76 480.555 1363.69 495.197 1364.35 508.925 C 1336.19 509.476 1299.17 512.449 1270.55 514.165 C 1269.64 496.133 1267.62 470.605 1268.12 453.104 z"/>
-              <path fill="rgb(103,113,116)" d="M 1112.25 558.876 C 1212.31 556.072 1295.71 634.911 1298.53 734.977 C 1301.35 835.044 1222.52 918.451 1122.45 921.282 C 1022.37 924.114 938.941 845.268 936.123 745.183 C 933.304 645.097 1012.16 561.681 1112.25 558.876 z"/>
-              <path fill="rgb(34,32,33)" d="M 1110.65 584.259 C 1196.8 580.583 1269.59 647.517 1273.13 733.674 C 1276.66 819.831 1209.61 892.507 1123.45 895.908 C 1037.48 899.301 965.007 832.436 961.477 746.474 C 957.946 660.511 1024.7 587.927 1110.65 584.259 z"/>
-              <path fill="rgb(250,220,42)" d="M 845.993 701.285 L 846.728 701.603 C 848.05 704.494 845.347 721.947 845.045 726.79 C 843.644 749.251 845.408 768.413 848.459 790.567 C 834.83 789.636 830.506 788.026 819.199 780.407 C 811.401 773.105 806.274 765.079 804.448 754.388 C 802.417 742.745 805.184 730.775 812.117 721.204 C 820.518 709.481 832.187 703.743 845.993 701.285 z"/>
-              <path fill="rgb(250,220,42)" d="M 663.84 382.243 C 678.654 387.361 772.078 384.708 794.616 384.73 L 1066.9 384.679 C 1087.56 384.613 1112.17 385.342 1132.43 384.503 C 1185.81 382.292 1176.86 420.001 1176.94 458.021 C 1145.14 460.204 1108.61 461.345 1077.49 466.228 C 982.178 481.186 894.99 555.58 862.551 645.865 C 829.454 645.523 803.963 651.459 779.429 675.686 C 760.09 694.767 749.243 720.828 749.332 747.995 C 749.416 774.11 759.965 799.1 778.617 817.377 C 797.179 835.807 822.43 845.908 848.582 845.365 C 854.07 845.253 859.984 844.989 865.415 844.191 C 883.099 888.339 908.707 921.841 945.016 952.533 L 943.753 952.632 C 913.902 954.779 877.464 952.153 847.005 953.163 C 838.048 953.459 818.763 952.374 810.841 954.161 C 804.474 955.619 798.703 958.985 794.297 963.808 C 781.545 977.815 785.137 1009.85 785.21 1028.58 L 785.58 1118.42 C 785.618 1129.8 786.307 1152.94 785.452 1163.51 C 762.226 1162.61 658.998 1166.64 644.804 1160.28 C 636.349 1156.49 629.944 1148.7 627.103 1139.94 C 623.06 1127.48 625.279 1030.84 625.257 1011.66 L 625.214 657.49 L 625.174 500.058 C 625.158 472.909 624.957 445.327 625.396 418.164 C 625.529 409.932 628.05 404.376 631.58 397.259 C 643.869 387.085 648.495 386.357 663.84 382.243 z"/>
-              <path fill="rgb(103,113,116)" d="M 1723.21 738.847 C 1730.42 744.464 1738.84 751.766 1745.53 757.865 L 1769.77 778.417 L 1791 796.431 C 1742.81 853.824 1694.25 910.891 1645.3 967.63 C 1638.45 961.485 1631.55 955.402 1624.59 949.382 C 1618.43 944.804 1607.47 934.344 1600.32 928.61 L 1579.17 909.608 C 1611.9 872.978 1642.83 833.108 1675.44 796.121 C 1691.15 778.304 1708.93 757.755 1723.21 738.847 z"/>
-              <path fill="rgb(34,32,33)" d="M 1769.77 778.417 L 1791 796.431 C 1742.81 853.824 1694.25 910.891 1645.3 967.63 C 1638.45 961.485 1631.55 955.402 1624.59 949.382 C 1629.08 940.288 1672.65 891.331 1682.54 880.25 C 1711.58 847.72 1740.24 809.887 1769.77 778.417 z"/>
-              <path fill="rgb(34,32,33)" d="M 1723.21 738.847 C 1730.42 744.464 1738.84 751.766 1745.53 757.865 C 1733.68 770.676 1721.73 784.769 1710.59 798.275 C 1674.45 842.085 1636.16 884.606 1600.32 928.61 L 1579.17 909.608 C 1611.9 872.978 1642.83 833.108 1675.44 796.121 C 1691.15 778.304 1708.93 757.755 1723.21 738.847 z"/>
-              <path fill="rgb(34,32,33)" d="M 1766.02 695.14 C 1769.62 694.858 1777.73 694.269 1780.83 696.314 C 1795.29 705.67 1808.4 718.192 1821.24 729.651 C 1838.68 745.202 1819.61 766.175 1806.91 777.68 L 1805.09 777.243 C 1783.04 758.458 1761.15 739.492 1739.41 720.346 C 1748.07 710.723 1754.13 700.171 1766.02 695.14 z"/>
-              <path fill="rgb(34,32,33)" d="M 1572.06 952.944 C 1580.76 958.699 1598.77 974.645 1607.04 981.76 L 1594.8 984.718 C 1585.92 987.45 1576.21 989.879 1567.18 992.314 C 1569.48 979.176 1570.7 966.196 1572.06 952.944 z"/>
-            </svg>
-          </div>
+          <Logo />
           <h1>Generator Rapoarte Arbitraj</h1>
           <p class="subtitle">
             Sistem profesional pentru generarea rapidă și precisă a rapoartelor oficiale de arbitraj
@@ -646,222 +44,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
           </div>
 
           <form id="reportForm" novalidate>
-            <!-- Basic Information Section -->
-            <div class="form-section-content section-divider">
-              <div class="section-header">
-                <div class="section-icon" aria-hidden="true">
-                  <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <h3 class="section-title">Informații de bază</h3>
-              </div>
+            <BasicInfoSection />
+            <MatchInfoSection />
+            <U15Section />
+            <ErrorDisplay />
 
-              <div class="form-row">
-                <label>
-                  <span class="label-text">
-                    Categorie de vârstă<span class="required">*</span>
-                  </span>
-                  <select name="age_category" id="ageCategory" required>
-                    <option value="">Selectează categoria de vârstă</option>
-                    <option value="U9">U9 - Sub 9 ani</option>
-                    <option value="U11">U11 - Sub 11 ani</option>
-                    <option value="U13">U13 - Sub 13 ani</option>
-                    <option value="U15">U15+ - Sub 15 ani și peste</option>
-                  </select>
-                </label>
-
-                <label>
-                  <span class="label-text">
-                    Nume arbitru principal<span class="required">*</span>
-                  </span>
-                  <input 
-                    name="referee_name_1" 
-                    type="text"
-                    placeholder="Introduceți numele arbitrului principal" 
-                    required 
-                    autocomplete="name"
-                  />
-                </label>
-
-                <label id="field_referee_name_2" style="display: none;">
-                  <span class="label-text">
-                    Nume arbitru secundar<span class="required" id="req_referee_name_2">*</span>
-                  </span>
-                  <input 
-                    name="referee_name_2" 
-                    type="text"
-                    placeholder="Introduceți numele arbitrului secundar" 
-                    autocomplete="name"
-                  />
-                </label>
-              </div>
-            </div>
-
-            <!-- Match Information Section -->
-            <div class="form-section-content muted section-divider">
-              <div class="section-header">
-                <div class="section-icon" aria-hidden="true">
-                  <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 class="section-title">Informații meci</h3>
-              </div>
-
-              <div class="form-row two-col">
-                <label>
-                  <span class="label-text">
-                    Data meciului<span class="required">*</span>
-                  </span>
-                  <input name="match_date" type="date" required />
-                </label>
-                <label>
-                  <span class="label-text">
-                    Ora de începere<span class="required">*</span>
-                  </span>
-                  <input name="starting_hour" type="time" required />
-                </label>
-              </div>
-
-              <label>
-                <span class="label-text">
-                  Echipa gazdă<span class="required">*</span>
-                </span>
-                <input 
-                  name="team_1" 
-                  type="text"
-                  placeholder="Introduceți numele echipei gazdă" 
-                  required 
-                />
-              </label>
-
-              <label>
-                <span class="label-text">
-                  Echipa oaspete<span class="required">*</span>
-                </span>
-                <input 
-                  name="team_2" 
-                  type="text"
-                  placeholder="Introduceți numele echipei oaspete" 
-                  required 
-                />
-              </label>
-            </div>
-
-            <!-- U15+ Additional Information -->
-            <div id="u15Section" class="form-section-content section-divider" style="display: none;">
-              <div class="section-header">
-                <div class="section-icon" aria-hidden="true">
-                  <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <h3 class="section-title">Informații suplimentare (U15+)</h3>
-              </div>
-
-              <label id="field_competition">
-                <span class="label-text">
-                  Competiție
-                </span>
-                <input 
-                  name="competition" 
-                  type="text"
-                  placeholder="Introduceți numele competiției" 
-                />
-              </label>
-
-              <div class="form-row two-col">
-                <label id="field_assistant_referee_1">
-                  <span class="label-text">
-                    Arbitru asistent 1
-                  </span>
-                  <input 
-                    name="assistant_referee_1" 
-                    type="text"
-                    placeholder="Numele arbitrului asistent 1" 
-                    autocomplete="name"
-                  />
-                </label>
-
-                <label id="field_assistant_referee_2">
-                  <span class="label-text">
-                    Arbitru asistent 2
-                  </span>
-                  <input 
-                    name="assistant_referee_2" 
-                    type="text"
-                    placeholder="Numele arbitrului asistent 2" 
-                    autocomplete="name"
-                  />
-                </label>
-              </div>
-
-              <label id="field_fourth_official">
-                <span class="label-text">
-                  Al 4-lea oficial
-                </span>
-                <input 
-                  name="fourth_official" 
-                  type="text"
-                  placeholder="Numele celui de-al 4-lea oficial" 
-                  autocomplete="name"
-                />
-              </label>
-
-              <div style="background: var(--ui-card); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--ui-border); margin-top: 0.5rem;">
-                <div class="section-header" style="margin-bottom: 1rem;">
-                  <div class="section-icon" aria-hidden="true">
-                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <h4 class="section-title" style="font-size: 1rem;">Informații stadion</h4>
-                </div>
-
-                <div class="form-row two-col">
-                  <label id="field_stadium_name">
-                    <span class="label-text">
-                      Nume stadion
-                    </span>
-                    <input 
-                      name="stadium_name" 
-                      type="text"
-                      placeholder="Numele stadionului" 
-                    />
-                  </label>
-
-                  <label id="field_stadium_locality">
-                    <span class="label-text">
-                      Localitatea stadionului
-                    </span>
-                    <input 
-                      name="stadium_locality" 
-                      type="text"
-                      placeholder="Localitatea stadionului" 
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Error Display -->
-            <div id="errorSection" class="form-section-content" style="display: none;">
-              <div style="background: color-mix(in srgb, var(--ui-error) 10%, transparent); border: 1px solid color-mix(in srgb, var(--ui-error) 20%, transparent); border-radius: 12px; padding: 1rem;">
-                <div style="display: flex; align-items: start; gap: 0.75rem;">
-                  <svg style="width: 20px; height: 20px; flex-shrink: 0; stroke: var(--ui-error);" fill="none" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                  </svg>
-                  <div>
-                    <h4 style="margin: 0 0 0.25rem; font-size: 0.875rem; font-weight: 600; color: var(--ui-error);">Eroare</h4>
-                    <p id="errorMessage" style="margin: 0; font-size: 0.875rem; color: color-mix(in srgb, var(--ui-error) 90%, var(--ui-text));"></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Submit Button -->
             <div class="form-section-content muted">
               <button type="submit" id="submitBtn" style="margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
                 <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -882,208 +69,152 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     </main>
 
     <script>
-      (() => {
-        // Theme management
-        const themeToggle = document.getElementById('themeToggle');
-        const htmlElement = document.documentElement;
+      const API_URL = 'https://ref-tool-worker.florianvictorcristea.workers.dev/api/generate-report';
+      const form = document.getElementById('reportForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const statusBadge = document.getElementById('statusBadge');
+      const ageCategory = document.getElementById('ageCategory');
+
+      const updateFormFields = (category) => {
+        const u15Section = document.getElementById('u15Section');
+        const field_referee_name_2 = document.getElementById('field_referee_name_2');
+        const req_referee_name_2 = document.getElementById('req_referee_name_2');
+        const referee_name_2_input = document.querySelector('input[name="referee_name_2"]');
         
-        // Get saved theme or default to system preference
-        const getSavedTheme = () => {
-          const saved = localStorage.getItem('theme');
-          if (saved) return saved;
-          
-          // Check system preference
-          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
+        if (!category) {
+          if (u15Section) u15Section.style.display = 'none';
+          if (field_referee_name_2) field_referee_name_2.style.display = 'none';
+          if (referee_name_2_input) {
+            referee_name_2_input.required = false;
+            referee_name_2_input.value = '';
           }
-          return 'light';
-        };
-
-        // Set theme
-        const setTheme = (theme) => {
-          htmlElement.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
-        };
-
-        // Toggle theme
-        const toggleTheme = () => {
-          const currentTheme = htmlElement.getAttribute('data-theme') || getSavedTheme();
-          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-          setTheme(newTheme);
-        };
-
-        // Initialize theme
-        setTheme(getSavedTheme());
-
-        // Listen for toggle button
-        themeToggle.addEventListener('click', toggleTheme);
-
-        // Listen for system theme changes
-        if (window.matchMedia) {
-          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            // Only auto-switch if user hasn't manually set a preference
-            if (!localStorage.getItem('theme')) {
-              setTheme(e.matches ? 'dark' : 'light');
-            }
-          });
+          return;
         }
 
-        // Form management
-        const API_URL = 'https://ref-tool-worker.florianvictorcristea.workers.dev/api/generate-report';
-        const form = document.getElementById('reportForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const statusBadge = document.getElementById('statusBadge');
-        const ageCategory = document.getElementById('ageCategory');
+        if (category === 'U11' || category === 'U13') {
+          if (field_referee_name_2) field_referee_name_2.style.display = 'flex';
+          if (referee_name_2_input) referee_name_2_input.required = true;
+          if (req_referee_name_2) req_referee_name_2.style.display = 'inline';
+          if (u15Section) u15Section.style.display = 'none';
+        } else if (category === 'U15') {
+          if (field_referee_name_2) field_referee_name_2.style.display = 'none';
+          if (referee_name_2_input) {
+            referee_name_2_input.required = false;
+            referee_name_2_input.value = '';
+          }
+          if (u15Section) u15Section.style.display = 'block';
+        } else {
+          if (field_referee_name_2) field_referee_name_2.style.display = 'none';
+          if (referee_name_2_input) {
+            referee_name_2_input.required = false;
+            referee_name_2_input.value = '';
+          }
+          if (u15Section) u15Section.style.display = 'none';
+        }
+      };
 
-        const updateFormFields = (category) => {
-          const u15Section = document.getElementById('u15Section');
-          const field_referee_name_2 = document.getElementById('field_referee_name_2');
-          const req_referee_name_2 = document.getElementById('req_referee_name_2');
-          const referee_name_2_input = document.querySelector('input[name="referee_name_2"]');
+      const showError = (text) => {
+        const errorSection = document.getElementById('errorSection');
+        const errorMessage = document.getElementById('errorMessage');
+        if (errorSection && errorMessage) {
+          errorMessage.textContent = text;
+          errorSection.style.display = 'block';
+        }
+      };
+
+      const hideError = () => {
+        const errorSection = document.getElementById('errorSection');
+        if (errorSection) {
+          errorSection.style.display = 'none';
+        }
+      };
+
+      ageCategory?.addEventListener('change', (e) => {
+        updateFormFields(e.target.value);
+      });
+
+      form?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        hideError();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const buttonText = document.getElementById('buttonText');
+        submitBtn.disabled = true;
+        if (buttonText) {
+          buttonText.innerHTML = `
+            <svg style="width: 20px; height: 20px; animation: spin 1s linear infinite;" fill="none" viewBox="0 0 24 24">
+              <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Se generează raportul...
+          `;
+        }
+        statusBadge.textContent = 'În procesare';
+        statusBadge.style.background = 'color-mix(in srgb, var(--ui-accent) 15%, transparent)';
+
+        const formData = new FormData(form);
+        const payload = {};
+        
+        for (const [key, value] of formData.entries()) {
+          if (value && value.trim() !== '') {
+            payload[key] = value;
+          }
+        }
+
+        try {
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Eroare ${response.status}: ${errorText}`);
+          }
+
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `raport_arbitraj_${payload.match_date || 'document'}.pdf`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+
+          statusBadge.textContent = '✓ Raport generat';
+          statusBadge.style.background = 'color-mix(in srgb, var(--ui-success) 15%, transparent)';
+          statusBadge.style.color = 'var(--ui-success)';
           
-          if (!category) {
-            // Hide all optional sections
-            if (u15Section) u15Section.style.display = 'none';
-            if (field_referee_name_2) field_referee_name_2.style.display = 'none';
-            if (referee_name_2_input) {
-              referee_name_2_input.required = false;
-              referee_name_2_input.value = '';
-            }
-            return;
-          }
+          setTimeout(() => {
+            statusBadge.textContent = 'Sistem pregătit';
+            statusBadge.style.background = 'var(--ui-primary-soft)';
+            statusBadge.style.color = 'var(--ui-primary)';
+          }, 3000);
 
-          // Handle referee_name_2 for U11 and U13
-          if (category === 'U11' || category === 'U13') {
-            if (field_referee_name_2) field_referee_name_2.style.display = 'flex';
-            if (referee_name_2_input) referee_name_2_input.required = true;
-            if (req_referee_name_2) req_referee_name_2.style.display = 'inline';
-            if (u15Section) u15Section.style.display = 'none';
-          }
-          // Handle U15+ section
-          else if (category === 'U15') {
-            if (field_referee_name_2) field_referee_name_2.style.display = 'none';
-            if (referee_name_2_input) {
-              referee_name_2_input.required = false;
-              referee_name_2_input.value = '';
-            }
-            if (u15Section) u15Section.style.display = 'block';
-          }
-          // U9 - hide all optional fields
-          else {
-            if (field_referee_name_2) field_referee_name_2.style.display = 'none';
-            if (referee_name_2_input) {
-              referee_name_2_input.required = false;
-              referee_name_2_input.value = '';
-            }
-            if (u15Section) u15Section.style.display = 'none';
-          }
-        };
-
-        // Listen for age category changes
-        ageCategory.addEventListener('change', (e) => {
-          updateFormFields(e.target.value);
-        });
-
-        const showError = (text) => {
-          const errorSection = document.getElementById('errorSection');
-          const errorMessage = document.getElementById('errorMessage');
-          if (errorSection && errorMessage) {
-            errorMessage.textContent = text;
-            errorSection.style.display = 'block';
-          }
-        };
-
-        const hideError = () => {
-          const errorSection = document.getElementById('errorSection');
-          if (errorSection) {
-            errorSection.style.display = 'none';
-          }
-        };
-
-        form.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          hideError();
-
-          if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-          }
-
-          const buttonText = document.getElementById('buttonText');
-          submitBtn.disabled = true;
+        } catch (error) {
+          console.error('Eroare la generare:', error);
+          showError(error.message || 'A apărut o eroare. Verificați conexiunea și încercați din nou.');
+          statusBadge.textContent = '✗ Eroare generare';
+          statusBadge.style.background = 'color-mix(in srgb, var(--ui-error) 15%, transparent)';
+          statusBadge.style.color = 'var(--ui-error)';
+        } finally {
+          submitBtn.disabled = false;
           if (buttonText) {
             buttonText.innerHTML = `
-              <svg style="width: 20px; height: 20px; animation: spin 1s linear infinite;" fill="none" viewBox="0 0 24 24">
-                <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
-              Se generează raportul...
+              Generează raport PDF
             `;
           }
-          statusBadge.textContent = 'În procesare';
-          statusBadge.style.background = 'color-mix(in srgb, var(--ui-accent) 15%, transparent)';
-
-          const formData = new FormData(form);
-          const payload = {};
-          
-          // Only include visible and filled fields
-          for (const [key, value] of formData.entries()) {
-            if (value && value.trim() !== '') {
-              payload[key] = value;
-            }
-          }
-
-          try {
-            const response = await fetch(API_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
-            });
-
-            if (!response.ok) {
-              const errorText = await response.text();
-              throw new Error(`Eroare ${response.status}: ${errorText}`);
-            }
-
-            const blob = await response.blob();
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `raport_arbitraj_${payload.match_date || 'document'}.pdf`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-
-            statusBadge.textContent = '✓ Raport generat';
-            statusBadge.style.background = 'color-mix(in srgb, var(--ui-success) 15%, transparent)';
-            statusBadge.style.color = 'var(--ui-success)';
-            
-            setTimeout(() => {
-              statusBadge.textContent = 'Sistem pregătit';
-              statusBadge.style.background = 'var(--ui-primary-soft)';
-              statusBadge.style.color = 'var(--ui-primary)';
-            }, 3000);
-
-          } catch (error) {
-            console.error('Eroare la generare:', error);
-            showError(error.message || 'A apărut o eroare. Verificați conexiunea și încercați din nou.');
-            statusBadge.textContent = '✗ Eroare generare';
-            statusBadge.style.background = 'color-mix(in srgb, var(--ui-error) 15%, transparent)';
-            statusBadge.style.color = 'var(--ui-error)';
-          } finally {
-            submitBtn.disabled = false;
-            if (buttonText) {
-              buttonText.innerHTML = `
-                <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Generează raport PDF
-              `;
-            }
-          }
-        });
-      })();
+        }
+      });
     </script>
     <Footer />
   </body>
