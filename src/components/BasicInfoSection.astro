@@ -1,0 +1,53 @@
+---
+---
+
+<div class="form-section-content section-divider">
+  <div class="section-header">
+    <div class="section-icon" aria-hidden="true">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+    </div>
+    <h3 class="section-title">Informații de bază</h3>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span class="label-text">
+        Categorie de vârstă<span class="required">*</span>
+      </span>
+      <select name="age_category" id="ageCategory" required>
+        <option value="">Selectează categoria de vârstă</option>
+        <option value="U9">U9 - Sub 9 ani</option>
+        <option value="U11">U11 - Sub 11 ani</option>
+        <option value="U13">U13 - Sub 13 ani</option>
+        <option value="U15">U15+ - Sub 15 ani și peste</option>
+      </select>
+    </label>
+
+    <label>
+      <span class="label-text">
+        Nume arbitru principal<span class="required">*</span>
+      </span>
+      <input 
+        name="referee_name_1" 
+        type="text"
+        placeholder="Introduceți numele arbitrului principal" 
+        required 
+        autocomplete="name"
+      />
+    </label>
+
+    <label id="field_referee_name_2" style="display: none;">
+      <span class="label-text">
+        Nume arbitru secundar<span class="required" id="req_referee_name_2">*</span>
+      </span>
+      <input 
+        name="referee_name_2" 
+        type="text"
+        placeholder="Introduceți numele arbitrului secundar" 
+        autocomplete="name"
+      />
+    </label>
+  </div>
+</div>

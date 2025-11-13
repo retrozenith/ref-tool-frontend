@@ -1,0 +1,176 @@
+/* Theme Variables */
+:root {
+  color-scheme: light dark;
+}
+
+/* Light theme (default) */
+:root,
+[data-theme="light"] {
+  --ui-background: #f5f7fa;
+  --ui-card: #ffffff;
+  --ui-card-hover: #fafbfc;
+  --ui-primary: #1e4976;
+  --ui-primary-hover: #163756;
+  --ui-primary-soft: #e8f0f8;
+  --ui-accent: #0d99ff;
+  --ui-accent-hover: #0b7fd6;
+  --ui-border: #dce2eb;
+  --ui-text: #1a2332;
+  --ui-text-secondary: #4a5568;
+  --ui-muted: #64748b;
+  --ui-success: #10b981;
+  --ui-warning: #f59e0b;
+  --ui-error: #ef4444;
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --ui-background: #000000;
+  --ui-card: #0a0e1a;
+  --ui-card-hover: #0f1421;
+  --ui-primary: #60a5fa;
+  --ui-primary-hover: #3b82f6;
+  --ui-primary-soft: #1e3a5f;
+  --ui-accent: #38bdf8;
+  --ui-accent-hover: #0ea5e9;
+  --ui-border: #1a2332;
+  --ui-text: #f1f5f9;
+  --ui-text-secondary: #cbd5e1;
+  --ui-muted: #94a3b8;
+  --ui-success: #34d399;
+  --ui-warning: #fbbf24;
+  --ui-error: #f87171;
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+}
+
+/* Auto dark mode based on system preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ui-background: #000000;
+    --ui-card: #0a0e1a;
+    --ui-card-hover: #0f1421;
+    --ui-primary: #60a5fa;
+    --ui-primary-hover: #3b82f6;
+    --ui-primary-soft: #1e3a5f;
+    --ui-accent: #38bdf8;
+    --ui-accent-hover: #0ea5e9;
+    --ui-border: #1a2332;
+    --ui-text: #f1f5f9;
+    --ui-text-secondary: #cbd5e1;
+    --ui-muted: #94a3b8;
+    --ui-success: #34d399;
+    --ui-warning: #fbbf24;
+    --ui-error: #f87171;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--ui-background);
+  color: var(--ui-text);
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+footer {
+  margin-top: auto;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+  }
+
+  .form-section {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  button,
+  .theme-toggle {
+    display: none;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 639px) {
+  main {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+
+  .logo {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1rem;
+  }
+}
