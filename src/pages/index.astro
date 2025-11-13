@@ -40,49 +40,49 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
       /* Dark theme */
       [data-theme="dark"] {
-        --ui-background: #0f172a;
-        --ui-card: #1e293b;
-        --ui-card-hover: #273548;
+        --ui-background: #000000;
+        --ui-card: #0a0e1a;
+        --ui-card-hover: #0f1421;
         --ui-primary: #60a5fa;
         --ui-primary-hover: #3b82f6;
         --ui-primary-soft: #1e3a5f;
         --ui-accent: #38bdf8;
         --ui-accent-hover: #0ea5e9;
-        --ui-border: #334155;
+        --ui-border: #1a2332;
         --ui-text: #f1f5f9;
         --ui-text-secondary: #cbd5e1;
         --ui-muted: #94a3b8;
         --ui-success: #34d399;
         --ui-warning: #fbbf24;
         --ui-error: #f87171;
-        --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+        --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
       }
 
       /* Auto dark mode based on system preference */
       @media (prefers-color-scheme: dark) {
         :root:not([data-theme="light"]) {
-          --ui-background: #0f172a;
-          --ui-card: #1e293b;
-          --ui-card-hover: #273548;
+          --ui-background: #000000;
+          --ui-card: #0a0e1a;
+          --ui-card-hover: #0f1421;
           --ui-primary: #60a5fa;
           --ui-primary-hover: #3b82f6;
           --ui-primary-soft: #1e3a5f;
           --ui-accent: #38bdf8;
           --ui-accent-hover: #0ea5e9;
-          --ui-border: #334155;
+          --ui-border: #1a2332;
           --ui-text: #f1f5f9;
           --ui-text-secondary: #cbd5e1;
           --ui-muted: #94a3b8;
           --ui-success: #34d399;
           --ui-warning: #fbbf24;
           --ui-error: #f87171;
-          --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
-          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-          --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+          --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+          --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
         }
       }
 
@@ -179,16 +179,49 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
       .form-section {
         width: 100%;
         background: var(--ui-card);
-        border-radius: clamp(16px, 2vw, 24px);
-        padding: clamp(1.5rem, 4vw, 3rem);
-        box-shadow: var(--shadow-xl);
+        border-radius: clamp(12px, 2vw, 16px);
+        box-shadow: var(--shadow-sm);
         border: 1px solid var(--ui-border);
+        overflow: hidden;
+      }
+
+      .section-divider {
+        border-bottom: 1px solid var(--ui-border);
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: var(--ui-primary-soft);
+        border-radius: 8px;
+        flex-shrink: 0;
+      }
+
+      .section-icon svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--ui-primary);
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--ui-text);
       }
 
       .form-header {
-        margin-bottom: clamp(1.5rem, 3vw, 2rem);
-        padding-bottom: clamp(1rem, 2vw, 1.5rem);
-        border-bottom: 1px solid var(--ui-border);
+        padding: clamp(1.5rem, 4vw, 2rem);
       }
 
       .status-badge {
@@ -219,6 +252,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         50% { opacity: 0.5; }
       }
 
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
       h2 {
         margin: 0 0 0.5rem;
         font-size: clamp(1.5rem, 3vw, 1.875rem);
@@ -234,19 +272,32 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         font-size: 0.9375rem;
       }
 
-      form {
+      .form-section-content {
+        padding: clamp(1.5rem, 4vw, 2rem);
         display: grid;
-        gap: clamp(1.25rem, 2.5vw, 1.5rem);
+        gap: clamp(1rem, 2vw, 1.25rem);
+      }
+
+      .form-section-content.muted {
+        background: color-mix(in srgb, var(--ui-card) 70%, var(--ui-background) 30%);
+      }
+
+      form {
+        display: contents;
       }
 
       .form-row {
         display: grid;
-        gap: clamp(1.25rem, 2.5vw, 1.5rem);
+        gap: clamp(1rem, 2vw, 1.25rem);
       }
 
       @media (min-width: 640px) {
         .form-row.two-col {
           grid-template-columns: repeat(2, 1fr);
+        }
+
+        .form-section-content {
+          padding: clamp(2rem, 4vw, 2.5rem);
         }
       }
 
@@ -582,161 +633,239 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
             </div>
             <h2 id="form-title">Completați datele meciului</h2>
             <p class="form-description">
-              Sistem profesional pentru generarea rapoartelor de arbitraj în format PDF. Toate câmpurile marcate cu <span style="color: var(--ui-error)">*</span> sunt obligatorii.
+              Toate câmpurile marcate cu <span style="color: var(--ui-error)">*</span> sunt obligatorii.
             </p>
           </div>
 
           <form id="reportForm" novalidate>
-            <label>
-              <span class="label-text">
-                Categorie de vârstă<span class="required">*</span>
-              </span>
-              <select name="age_category" id="ageCategory" required>
-                <option value="">Selectează categoria</option>
-                <option value="U9">U9 - Sub 9 ani</option>
-                <option value="U11">U11 - Sub 11 ani</option>
-                <option value="U13">U13 - Sub 13 ani</option>
-                <option value="U15">U15 - Sub 15 ani</option>
-              </select>
-            </label>
+            <!-- Basic Information Section -->
+            <div class="form-section-content section-divider">
+              <div class="section-header">
+                <div class="section-icon" aria-hidden="true">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h3 class="section-title">Informații de bază</h3>
+              </div>
 
-            <label>
-              <span class="label-text">
-                Nume arbitru 1<span class="required">*</span>
-              </span>
-              <input 
-                name="referee_name_1" 
-                type="text"
-                placeholder="ex: Ion Popescu" 
-                required 
-                autocomplete="name"
-              />
-            </label>
+              <div class="form-row">
+                <label>
+                  <span class="label-text">
+                    Categorie de vârstă<span class="required">*</span>
+                  </span>
+                  <select name="age_category" id="ageCategory" required>
+                    <option value="">Selectează categoria de vârstă</option>
+                    <option value="U9">U9 - Sub 9 ani</option>
+                    <option value="U11">U11 - Sub 11 ani</option>
+                    <option value="U13">U13 - Sub 13 ani</option>
+                    <option value="U15">U15+ - Sub 15 ani și peste</option>
+                  </select>
+                </label>
 
-            <label id="field_referee_name_2" style="display: none;">
-              <span class="label-text">
-                Nume arbitru 2<span class="required" id="req_referee_name_2">*</span>
-              </span>
-              <input 
-                name="referee_name_2" 
-                type="text"
-                placeholder="ex: Maria Ionescu" 
-                autocomplete="name"
-              />
-            </label>
+                <label>
+                  <span class="label-text">
+                    Nume arbitru principal<span class="required">*</span>
+                  </span>
+                  <input 
+                    name="referee_name_1" 
+                    type="text"
+                    placeholder="Introduceți numele arbitrului principal" 
+                    required 
+                    autocomplete="name"
+                  />
+                </label>
 
-            <label id="field_assistant_referee_1" style="display: none;">
-              <span class="label-text">
-                Arbitru asistent 1
-              </span>
-              <input 
-                name="assistant_referee_1" 
-                type="text"
-                placeholder="ex: Andrei Popescu" 
-                autocomplete="name"
-              />
-            </label>
+                <label id="field_referee_name_2" style="display: none;">
+                  <span class="label-text">
+                    Nume arbitru secundar<span class="required" id="req_referee_name_2">*</span>
+                  </span>
+                  <input 
+                    name="referee_name_2" 
+                    type="text"
+                    placeholder="Introduceți numele arbitrului secundar" 
+                    autocomplete="name"
+                  />
+                </label>
+              </div>
+            </div>
 
-            <label id="field_assistant_referee_2" style="display: none;">
-              <span class="label-text">
-                Arbitru asistent 2
-              </span>
-              <input 
-                name="assistant_referee_2" 
-                type="text"
-                placeholder="ex: Elena Dumitrescu" 
-                autocomplete="name"
-              />
-            </label>
+            <!-- Match Information Section -->
+            <div class="form-section-content muted section-divider">
+              <div class="section-header">
+                <div class="section-icon" aria-hidden="true">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 class="section-title">Informații meci</h3>
+              </div>
 
-            <label id="field_fourth_official" style="display: none;">
-              <span class="label-text">
-                Al 4-lea oficial
-              </span>
-              <input 
-                name="fourth_official" 
-                type="text"
-                placeholder="ex: Mihai Stan" 
-                autocomplete="name"
-              />
-            </label>
+              <div class="form-row two-col">
+                <label>
+                  <span class="label-text">
+                    Data meciului<span class="required">*</span>
+                  </span>
+                  <input name="match_date" type="date" required />
+                </label>
+                <label>
+                  <span class="label-text">
+                    Ora de începere<span class="required">*</span>
+                  </span>
+                  <input name="starting_hour" type="time" required />
+                </label>
+              </div>
 
-            <div class="form-row two-col">
               <label>
                 <span class="label-text">
-                  Data meciului<span class="required">*</span>
+                  Echipa gazdă<span class="required">*</span>
                 </span>
-                <input name="match_date" type="date" required />
+                <input 
+                  name="team_1" 
+                  type="text"
+                  placeholder="Introduceți numele echipei gazdă" 
+                  required 
+                />
               </label>
+
               <label>
                 <span class="label-text">
-                  Ora de start<span class="required">*</span>
+                  Echipa oaspete<span class="required">*</span>
                 </span>
-                <input name="starting_hour" type="time" required />
+                <input 
+                  name="team_2" 
+                  type="text"
+                  placeholder="Introduceți numele echipei oaspete" 
+                  required 
+                />
               </label>
             </div>
 
-            <label>
-              <span class="label-text">
-                Echipa gazdă<span class="required">*</span>
-              </span>
-              <input 
-                name="team_1" 
-                type="text"
-                placeholder="ex: ACS Sportul Exemplu" 
-                required 
-              />
-            </label>
+            <!-- U15+ Additional Information -->
+            <div id="u15Section" class="form-section-content section-divider" style="display: none;">
+              <div class="section-header">
+                <div class="section-icon" aria-hidden="true">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h3 class="section-title">Informații suplimentare (U15+)</h3>
+              </div>
 
-            <label>
-              <span class="label-text">
-                Echipa oaspeți<span class="required">*</span>
-              </span>
-              <input 
-                name="team_2" 
-                type="text"
-                placeholder="ex: CS Oaspeții United" 
-                required 
-              />
-            </label>
+              <label id="field_competition">
+                <span class="label-text">
+                  Competiție
+                </span>
+                <input 
+                  name="competition" 
+                  type="text"
+                  placeholder="Introduceți numele competiției" 
+                />
+              </label>
 
-            <label id="field_competition" style="display: none;">
-              <span class="label-text">
-                Competiție
-              </span>
-              <input 
-                name="competition" 
-                type="text"
-                placeholder="ex: Campionatul Județean" 
-              />
-            </label>
+              <div class="form-row two-col">
+                <label id="field_assistant_referee_1">
+                  <span class="label-text">
+                    Arbitru asistent 1
+                  </span>
+                  <input 
+                    name="assistant_referee_1" 
+                    type="text"
+                    placeholder="Numele arbitrului asistent 1" 
+                    autocomplete="name"
+                  />
+                </label>
 
-            <label id="field_stadium_name" style="display: none;">
-              <span class="label-text">
-                Nume stadion
-              </span>
-              <input 
-                name="stadium_name" 
-                type="text"
-                placeholder="ex: Stadionul Central" 
-              />
-            </label>
+                <label id="field_assistant_referee_2">
+                  <span class="label-text">
+                    Arbitru asistent 2
+                  </span>
+                  <input 
+                    name="assistant_referee_2" 
+                    type="text"
+                    placeholder="Numele arbitrului asistent 2" 
+                    autocomplete="name"
+                  />
+                </label>
+              </div>
 
-            <label id="field_stadium_locality" style="display: none;">
-              <span class="label-text">
-                Localitate stadion
-              </span>
-              <input 
-                name="stadium_locality" 
-                type="text"
-                placeholder="ex: București" 
-              />
-            </label>
+              <label id="field_fourth_official">
+                <span class="label-text">
+                  Al 4-lea oficial
+                </span>
+                <input 
+                  name="fourth_official" 
+                  type="text"
+                  placeholder="Numele celui de-al 4-lea oficial" 
+                  autocomplete="name"
+                />
+              </label>
 
-            <div class="button-group">
-              <button type="submit" id="submitBtn">
-                Generează raportul PDF
+              <div style="background: var(--ui-card); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--ui-border); margin-top: 0.5rem;">
+                <div class="section-header" style="margin-bottom: 1rem;">
+                  <div class="section-icon" aria-hidden="true">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <h4 class="section-title" style="font-size: 1rem;">Informații stadion</h4>
+                </div>
+
+                <div class="form-row two-col">
+                  <label id="field_stadium_name">
+                    <span class="label-text">
+                      Nume stadion
+                    </span>
+                    <input 
+                      name="stadium_name" 
+                      type="text"
+                      placeholder="Numele stadionului" 
+                    />
+                  </label>
+
+                  <label id="field_stadium_locality">
+                    <span class="label-text">
+                      Localitatea stadionului
+                    </span>
+                    <input 
+                      name="stadium_locality" 
+                      type="text"
+                      placeholder="Localitatea stadionului" 
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Display -->
+            <div id="errorSection" class="form-section-content" style="display: none;">
+              <div style="background: color-mix(in srgb, var(--ui-error) 10%, transparent); border: 1px solid color-mix(in srgb, var(--ui-error) 20%, transparent); border-radius: 12px; padding: 1rem;">
+                <div style="display: flex; align-items: start; gap: 0.75rem;">
+                  <svg style="width: 20px; height: 20px; flex-shrink: 0; stroke: var(--ui-error);" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <div>
+                    <h4 style="margin: 0 0 0.25rem; font-size: 0.875rem; font-weight: 600; color: var(--ui-error);">Eroare</h4>
+                    <p id="errorMessage" style="margin: 0; font-size: 0.875rem; color: color-mix(in srgb, var(--ui-error) 90%, var(--ui-text));"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-section-content muted">
+              <button type="submit" id="submitBtn" style="margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span id="buttonText">Generează raport PDF</span>
               </button>
+              
+              <p style="text-align: center; font-size: 0.875rem; color: var(--ui-muted); margin: 1rem 0 0;">
+                Documentul va fi generat și descărcat automat în format PDF
+              </p>
+
               <div class="status-message" id="statusMessage"></div>
             </div>
           </form>
@@ -795,91 +924,51 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         const API_URL = 'https://ref-tool-worker.florianvictorcristea.workers.dev/api/generate-report';
         const form = document.getElementById('reportForm');
         const submitBtn = document.getElementById('submitBtn');
-        const statusMessage = document.getElementById('statusMessage');
         const statusBadge = document.getElementById('statusBadge');
         const ageCategory = document.getElementById('ageCategory');
 
-        // Field configuration based on age category
-        const fieldConfig = {
-          U9: {
-            referee_name_2: false,
-            assistant_referee_1: false,
-            assistant_referee_2: false,
-            fourth_official: false,
-            competition: false,
-            stadium_name: false,
-            stadium_locality: false
-          },
-          U11: {
-            referee_name_2: true,
-            assistant_referee_1: false,
-            assistant_referee_2: false,
-            fourth_official: false,
-            competition: false,
-            stadium_name: false,
-            stadium_locality: false
-          },
-          U13: {
-            referee_name_2: true,
-            assistant_referee_1: false,
-            assistant_referee_2: false,
-            fourth_official: false,
-            competition: false,
-            stadium_name: false,
-            stadium_locality: false
-          },
-          U15: {
-            referee_name_2: false,
-            assistant_referee_1: 'optional',
-            assistant_referee_2: 'optional',
-            fourth_official: 'optional',
-            competition: 'optional',
-            stadium_name: 'optional',
-            stadium_locality: 'optional'
-          }
-        };
-
         const updateFormFields = (category) => {
-          if (!category || !fieldConfig[category]) {
-            // Hide all optional fields if no category selected
-            Object.keys(fieldConfig.U9).forEach(fieldName => {
-              const fieldLabel = document.getElementById(`field_${fieldName}`);
-              const fieldInput = document.querySelector(`input[name="${fieldName}"]`);
-              if (fieldLabel) fieldLabel.style.display = 'none';
-              if (fieldInput) {
-                fieldInput.required = false;
-                fieldInput.value = '';
-              }
-            });
+          const u15Section = document.getElementById('u15Section');
+          const field_referee_name_2 = document.getElementById('field_referee_name_2');
+          const req_referee_name_2 = document.getElementById('req_referee_name_2');
+          const referee_name_2_input = document.querySelector('input[name="referee_name_2"]');
+          
+          if (!category) {
+            // Hide all optional sections
+            if (u15Section) u15Section.style.display = 'none';
+            if (field_referee_name_2) field_referee_name_2.style.display = 'none';
+            if (referee_name_2_input) {
+              referee_name_2_input.required = false;
+              referee_name_2_input.value = '';
+            }
             return;
           }
 
-          const config = fieldConfig[category];
-          
-          Object.entries(config).forEach(([fieldName, requirement]) => {
-            const fieldLabel = document.getElementById(`field_${fieldName}`);
-            const fieldInput = document.querySelector(`input[name="${fieldName}"]`);
-            const requiredSpan = document.getElementById(`req_${fieldName}`);
-
-            if (fieldLabel && fieldInput) {
-              if (requirement === false) {
-                // Hide field
-                fieldLabel.style.display = 'none';
-                fieldInput.required = false;
-                fieldInput.value = '';
-              } else if (requirement === true) {
-                // Show as required
-                fieldLabel.style.display = 'flex';
-                fieldInput.required = true;
-                if (requiredSpan) requiredSpan.style.display = 'inline';
-              } else if (requirement === 'optional') {
-                // Show as optional
-                fieldLabel.style.display = 'flex';
-                fieldInput.required = false;
-                if (requiredSpan) requiredSpan.style.display = 'none';
-              }
+          // Handle referee_name_2 for U11 and U13
+          if (category === 'U11' || category === 'U13') {
+            if (field_referee_name_2) field_referee_name_2.style.display = 'flex';
+            if (referee_name_2_input) referee_name_2_input.required = true;
+            if (req_referee_name_2) req_referee_name_2.style.display = 'inline';
+            if (u15Section) u15Section.style.display = 'none';
+          }
+          // Handle U15+ section
+          else if (category === 'U15') {
+            if (field_referee_name_2) field_referee_name_2.style.display = 'none';
+            if (referee_name_2_input) {
+              referee_name_2_input.required = false;
+              referee_name_2_input.value = '';
             }
-          });
+            if (u15Section) u15Section.style.display = 'block';
+          }
+          // U9 - hide all optional fields
+          else {
+            if (field_referee_name_2) field_referee_name_2.style.display = 'none';
+            if (referee_name_2_input) {
+              referee_name_2_input.required = false;
+              referee_name_2_input.value = '';
+            }
+            if (u15Section) u15Section.style.display = 'none';
+          }
         };
 
         // Listen for age category changes
@@ -887,32 +976,44 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
           updateFormFields(e.target.value);
         });
 
-        const updateBadge = (text, color) => {
-          statusBadge.textContent = text;
-          statusBadge.style.background = color;
+        const showError = (text) => {
+          const errorSection = document.getElementById('errorSection');
+          const errorMessage = document.getElementById('errorMessage');
+          if (errorSection && errorMessage) {
+            errorMessage.textContent = text;
+            errorSection.style.display = 'block';
+          }
         };
 
-        const showMessage = (text, type) => {
-          statusMessage.textContent = text;
-          statusMessage.className = `status-message visible ${type}`;
-        };
-
-        const hideMessage = () => {
-          statusMessage.className = 'status-message';
+        const hideError = () => {
+          const errorSection = document.getElementById('errorSection');
+          if (errorSection) {
+            errorSection.style.display = 'none';
+          }
         };
 
         form.addEventListener('submit', async (event) => {
           event.preventDefault();
-          hideMessage();
+          hideError();
 
           if (!form.checkValidity()) {
             form.reportValidity();
             return;
           }
 
+          const buttonText = document.getElementById('buttonText');
           submitBtn.disabled = true;
-          submitBtn.textContent = 'Se procesează...';
-          updateBadge('În procesare', 'rgba(13, 153, 255, 0.15)');
+          if (buttonText) {
+            buttonText.innerHTML = `
+              <svg style="width: 20px; height: 20px; animation: spin 1s linear infinite;" fill="none" viewBox="0 0 24 24">
+                <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Se generează raportul...
+            `;
+          }
+          statusBadge.textContent = 'În procesare';
+          statusBadge.style.background = 'color-mix(in srgb, var(--ui-accent) 15%, transparent)';
 
           const formData = new FormData(form);
           const payload = {};
@@ -946,23 +1047,32 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
 
-            showMessage('✓ Raportul a fost generat și descărcat cu succes!', 'success');
-            updateBadge('Raport generat', 'rgba(16, 185, 129, 0.15)');
+            statusBadge.textContent = '✓ Raport generat';
+            statusBadge.style.background = 'color-mix(in srgb, var(--ui-success) 15%, transparent)';
+            statusBadge.style.color = 'var(--ui-success)';
             
             setTimeout(() => {
-              updateBadge('Sistem pregătit', 'rgba(30, 73, 118, 0.1)');
+              statusBadge.textContent = 'Sistem pregătit';
+              statusBadge.style.background = 'var(--ui-primary-soft)';
+              statusBadge.style.color = 'var(--ui-primary)';
             }, 3000);
 
           } catch (error) {
             console.error('Eroare la generare:', error);
-            showMessage(
-              error.message || 'A apărut o eroare. Verificați conexiunea și încercați din nou.',
-              'error'
-            );
-            updateBadge('Eroare generare', 'rgba(239, 68, 68, 0.15)');
+            showError(error.message || 'A apărut o eroare. Verificați conexiunea și încercați din nou.');
+            statusBadge.textContent = '✗ Eroare generare';
+            statusBadge.style.background = 'color-mix(in srgb, var(--ui-error) 15%, transparent)';
+            statusBadge.style.color = 'var(--ui-error)';
           } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Generează raportul PDF';
+            if (buttonText) {
+              buttonText.innerHTML = `
+                <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Generează raport PDF
+              `;
+            }
           }
         });
       })();

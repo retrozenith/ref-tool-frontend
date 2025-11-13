@@ -1,5 +1,10 @@
 ---
 const today = new Date();
+import pkg from '../../package.json';
+
+// Get git commit hash (will be set during build)
+const gitHash = import.meta.env.PUBLIC_GIT_HASH || 'dev';
+const version = pkg.version;
 ---
 
 <footer>
@@ -9,6 +14,12 @@ const today = new Date();
 		</p>
 		<p class="footer-note">
 			Acest instrument a fost realizat de Cristea Florian Victor pentru fiecare arbitru AJF Ilfov. Verificați mereu corectitudinea rapoartelor generate de acest program web.
+		</p>
+		<p class="footer-note">
+			Găzduit de Cloudflare
+		</p>
+		<p class="version-info">
+			v{version} · {gitHash}
 		</p>
 	</div>
 </footer>
@@ -49,6 +60,19 @@ const today = new Date();
 		transition: color 0.3s ease;
 	}
 
+	.version-info {
+		margin: 0.75rem 0 0;
+		font-size: 0.75rem;
+		color: var(--ui-muted);
+		font-family: 'Monaco', 'Courier New', monospace;
+		opacity: 0.7;
+		transition: color 0.3s ease, opacity 0.3s ease;
+	}
+
+	.version-info:hover {
+		opacity: 1;
+	}
+
 	@media (max-width: 639px) {
 		footer {
 			padding: 1.5rem 1rem;
@@ -61,6 +85,10 @@ const today = new Date();
 
 		.footer-note {
 			font-size: 0.8125rem;
+		}
+
+		.version-info {
+			font-size: 0.6875rem;
 		}
 	}
 </style>
