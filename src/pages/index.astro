@@ -161,6 +161,60 @@ import '../styles/components.css';
       setupAutocomplete('team_1', 'autocomplete_team_1');
       setupAutocomplete('team_2', 'autocomplete_team_2');
 
+      // Category options per locality
+      const categoryOptions = {
+        'Ilfov': [
+          { value: 'U9', label: 'U9 - Sub 9 ani' },
+          { value: 'U11', label: 'U11 - Sub 11 ani' },
+          { value: 'U13', label: 'U13 - Sub 13 ani' },
+          { value: 'U15', label: 'U15+ - Sub 15 ani și peste' },
+        ],
+        'frf': [
+          { value: 'U11', label: 'U11 - Interliga' },
+          { value: 'U12', label: 'U12 - Interliga' },
+          { value: 'U13', label: 'U13 - Liga Elitelor' },
+          { value: 'U14', label: 'U14 - Liga Elitelor' },
+          { value: 'U15', label: 'U15 - Liga Elitelor' },
+          { value: 'U16', label: 'U16 - Liga Elitelor' },
+          { value: 'U17', label: 'U17 - Liga Elitelor' },
+          { value: 'U17F', label: 'U17 Feminin - Liga Elitelor' },
+          { value: 'LIGA2', label: 'Liga 2' },
+          { value: 'LIGA3', label: 'Liga 3' },
+          { value: 'LIGAT', label: 'Liga de Tineret' },
+          { value: 'CN', label: 'Campionate Naționale' },
+        ]
+      };
+
+      const locality = document.getElementById('locality');
+      
+      locality?.addEventListener('change', (e) => {
+        const selectedLocality = e.target.value;
+        const ageCategorySelect = document.getElementById('ageCategory');
+        
+        if (!ageCategorySelect) return;
+        
+        // Clear current options
+        ageCategorySelect.innerHTML = '<option value="">Selectează categoria de vârstă</option>';
+        
+        if (selectedLocality && categoryOptions[selectedLocality]) {
+          // Enable and populate
+          ageCategorySelect.disabled = false;
+          categoryOptions[selectedLocality].forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt.value;
+            option.textContent = opt.label;
+            ageCategorySelect.appendChild(option);
+          });
+        } else {
+          // Disable if no locality selected
+          ageCategorySelect.disabled = true;
+          ageCategorySelect.innerHTML = '<option value="">Mai întâi selectează asociația</option>';
+        }
+        
+        // Reset dependent fields
+        updateFormFields(null);
+      });
+
       const updateFormFields = (category) => {
         const u15Section = document.getElementById('u15Section');
         const field_referee_name_2 = document.getElementById('field_referee_name_2');
@@ -177,19 +231,24 @@ import '../styles/components.css';
           return;
         }
 
+        // Categories that need second referee (Ilfov U11/U13)
         if (category === 'U11' || category === 'U13') {
           if (field_referee_name_2) field_referee_name_2.style.display = 'flex';
           if (referee_name_2_input) referee_name_2_input.required = true;
           if (req_referee_name_2) req_referee_name_2.style.display = 'inline';
           if (u15Section) u15Section.style.display = 'none';
-        } else if (category === 'U15') {
+        } 
+        // Categories that show U15+ section (extended info)
+        else if (category === 'U15' || category === 'U14' || category === 'U16' || category === 'U17' || category === 'U17F' || category === 'LIGA2' || category === 'LIGA3' || category === 'LIGAT' || category === 'CN') {
           if (field_referee_name_2) field_referee_name_2.style.display = 'none';
           if (referee_name_2_input) {
             referee_name_2_input.required = false;
             referee_name_2_input.value = '';
           }
           if (u15Section) u15Section.style.display = 'block';
-        } else {
+        } 
+        // Other categories (U9, U12)
+        else {
           if (field_referee_name_2) field_referee_name_2.style.display = 'none';
           if (referee_name_2_input) {
             referee_name_2_input.required = false;

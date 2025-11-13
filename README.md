@@ -4,12 +4,14 @@ This frontend was initialized from the Cloudflare/Astro starter template. I clea
 
 ## Features
 
-- **PDF Report Generation**: Generate referee reports for U9, U11, U13, and U15 age categories
+- **PDF Report Generation**: Generate referee reports for U9-U17, Liga 2/3, Youth League, National Championships
+- **Multi-Locality Support**: AJF Ilfov (complete) and FRF (in development)
 - **Real-time System Status**: Live health monitoring of backend templates and services
 - **Template Integrity Verification**: SHA-256 hash checking on all PDF templates and fonts
 - **Automatic Testing**: Auto-test results for all age categories displayed in the UI
 - **Team Autocomplete**: Quick team selection from predefined list
 - **Dark/Light Theme**: User-controlled theme switching
+- **Dynamic Forms**: Category selection adapts based on selected locality
 
 What I changed (cleanup)
 - Added a `services` binding in `wrangler.json` so the frontend worker can call the API worker internally via `env.API.fetch(...)`.
@@ -69,9 +71,13 @@ Recent changes
 - Added a small report generation form to `src/pages/index.astro`. It posts JSON to `/api/generate-report` and downloads the returned PDF. If your API is deployed at a different URL, update the `API_URL` in the page's script.
 - **Added System Status Component**: Real-time monitoring widget shows backend health, template integrity (SHA-256 hashes), and autotest results
   - Automatic status checks every 60 seconds
-  - Expandable details panel showing template status, font validation, and test results
+  - Minimalist design with expandable details panel
   - Visual indicators for healthy/degraded/unhealthy states
-  - Manual refresh capability with `?refresh=true` parameter
+- **Added Locality Support**: Users can now select between AJF Ilfov and FRF (National)
+  - Dynamic category selection based on chosen locality
+  - AJF Ilfov: U9, U11, U13, U15 (fully functional)
+  - FRF: U11-U17, Liga 2/3, Youth League, National Championships (marked as "Incomplet - în dezvoltare")
+  - Form fields adapt automatically based on category requirements
 
 Blog cleanup
 - Removed blog routes and disabled the RSS endpoint. Blog content files remain in `src/content/blog/` but are no longer included in the build because `src/content.config.ts` no longer defines a `blog` collection.

@@ -14,17 +14,26 @@
   <div class="form-row">
     <label>
       <span class="label-text">
-        Categorie de vârstă<span class="required">*</span>
+        Asociație Județeană / Federație<span class="required">*</span>
       </span>
-      <select name="age_category" id="ageCategory" required>
-        <option value="">Selectează categoria de vârstă</option>
-        <option value="U9">U9 - Sub 9 ani</option>
-        <option value="U11">U11 - Sub 11 ani</option>
-        <option value="U13">U13 - Sub 13 ani</option>
-        <option value="U15">U15+ - Sub 15 ani și peste</option>
+      <select name="locality" id="locality" required>
+        <option value="">Selectează asociația</option>
+        <option value="Ilfov">AJF Ilfov</option>
+        <option value="frf">FRF (Incomplet - în dezvoltare)</option>
       </select>
     </label>
 
+    <label>
+      <span class="label-text">
+        Categorie de vârstă<span class="required">*</span>
+      </span>
+      <select name="age_category" id="ageCategory" required disabled>
+        <option value="">Mai întâi selectează asociația</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-row">
     <label>
       <span class="label-text">
         Nume arbitru principal<span class="required">*</span>
