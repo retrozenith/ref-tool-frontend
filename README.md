@@ -2,6 +2,15 @@
 
 This frontend was initialized from the Cloudflare/Astro starter template. I cleaned up the configuration so it's ready to be built and deployed.
 
+## Features
+
+- **PDF Report Generation**: Generate referee reports for U9, U11, U13, and U15 age categories
+- **Real-time System Status**: Live health monitoring of backend templates and services
+- **Template Integrity Verification**: SHA-256 hash checking on all PDF templates and fonts
+- **Automatic Testing**: Auto-test results for all age categories displayed in the UI
+- **Team Autocomplete**: Quick team selection from predefined list
+- **Dark/Light Theme**: User-controlled theme switching
+
 What I changed (cleanup)
 - Added a `services` binding in `wrangler.json` so the frontend worker can call the API worker internally via `env.API.fetch(...)`.
 
@@ -58,7 +67,30 @@ Generated/updated by automation to prepare the project for deployment.
 Recent changes
 - Excluded starter placeholder images from assets by updating `public/.assetsignore`.
 - Added a small report generation form to `src/pages/index.astro`. It posts JSON to `/api/generate-report` and downloads the returned PDF. If your API is deployed at a different URL, update the `API_URL` in the page's script.
+- **Added System Status Component**: Real-time monitoring widget shows backend health, template integrity (SHA-256 hashes), and autotest results
+  - Automatic status checks every 60 seconds
+  - Expandable details panel showing template status, font validation, and test results
+  - Visual indicators for healthy/degraded/unhealthy states
+  - Manual refresh capability with `?refresh=true` parameter
 
 Blog cleanup
 - Removed blog routes and disabled the RSS endpoint. Blog content files remain in `src/content/blog/` but are no longer included in the build because `src/content.config.ts` no longer defines a `blog` collection.
 - Replaced the blog layout with a lightweight placeholder so any residual references don't break the build.
+
+## System Status Monitoring
+
+The frontend now includes a comprehensive status monitoring system that:
+
+1. **Checks Backend Health**: Polls `/api/status` endpoint every 60 seconds
+2. **Validates Template Integrity**: Displays SHA-256 hash validation results for all PDF templates
+3. **Shows Autotest Results**: Real-time feedback on PDF generation tests for all age categories
+4. **Visual Status Indicators**:
+   - 🟢 **Healthy**: All systems operational, tests passing
+   - 🟡 **Degraded**: Systems operational but tests failing
+   - 🔴 **Unhealthy**: Missing files or hash mismatches detected
+
+Users can expand the status widget to see detailed information about:
+- Each PDF template status (U9, U11, U13, U15)
+- Font file integrity
+- Autotest execution time and errors (if any)
+- Timestamp of last check

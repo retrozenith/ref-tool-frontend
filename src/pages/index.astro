@@ -7,6 +7,7 @@ import BasicInfoSection from "../components/BasicInfoSection.astro";
 import MatchInfoSection from "../components/MatchInfoSection.astro";
 import U15Section from "../components/U15Section.astro";
 import ErrorDisplay from "../components/ErrorDisplay.astro";
+import SystemStatus from "../components/SystemStatus.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 import '../styles/main.css';
@@ -34,14 +35,13 @@ import '../styles/components.css';
 
         <section class="form-section" aria-labelledby="form-title">
           <div class="form-header">
-            <div class="status-badge" id="statusBadge">
-              Sistem pregătit
-            </div>
             <h2 id="form-title">Completați datele meciului</h2>
             <p class="form-description">
               Toate câmpurile marcate cu <span style="color: var(--ui-error)">*</span> sunt obligatorii.
             </p>
           </div>
+
+          <SystemStatus />
 
           <form id="reportForm" novalidate>
             <BasicInfoSection />
@@ -74,7 +74,6 @@ import '../styles/components.css';
       const API_URL = 'https://ref-tool-worker.florianvictorcristea.workers.dev/api/generate-report';
       const form = document.getElementById('reportForm');
       const submitBtn = document.getElementById('submitBtn');
-      const statusBadge = document.getElementById('statusBadge');
       const ageCategory = document.getElementById('ageCategory');
 
       // Autocomplete functionality
@@ -240,8 +239,6 @@ import '../styles/components.css';
             Se generează raportul...
           `;
         }
-        statusBadge.textContent = 'În procesare';
-        statusBadge.style.background = 'color-mix(in srgb, var(--ui-accent) 15%, transparent)';
 
         const formData = new FormData(form);
         const payload = {};
@@ -274,22 +271,9 @@ import '../styles/components.css';
           document.body.removeChild(link);
           URL.revokeObjectURL(url);
 
-          statusBadge.textContent = '✓ Raport generat';
-          statusBadge.style.background = 'color-mix(in srgb, var(--ui-success) 15%, transparent)';
-          statusBadge.style.color = 'var(--ui-success)';
-          
-          setTimeout(() => {
-            statusBadge.textContent = 'Sistem pregătit';
-            statusBadge.style.background = 'var(--ui-primary-soft)';
-            statusBadge.style.color = 'var(--ui-primary)';
-          }, 3000);
-
         } catch (error) {
           console.error('Eroare la generare:', error);
           showError(error.message || 'A apărut o eroare. Verificați conexiunea și încercați din nou.');
-          statusBadge.textContent = '✗ Eroare generare';
-          statusBadge.style.background = 'color-mix(in srgb, var(--ui-error) 15%, transparent)';
-          statusBadge.style.color = 'var(--ui-error)';
         } finally {
           submitBtn.disabled = false;
           if (buttonText) {
