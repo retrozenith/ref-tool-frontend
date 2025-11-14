@@ -8,6 +8,7 @@ import MatchInfoSection from "../components/MatchInfoSection.astro";
 import U15Section from "../components/U15Section.astro";
 import ErrorDisplay from "../components/ErrorDisplay.astro";
 import SystemStatus from "../components/SystemStatus.astro";
+import TermsModal from "../components/TermsModal.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 import '../styles/main.css';
@@ -21,6 +22,7 @@ import '../styles/components.css';
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   </head>
   <body>
+    <TermsModal />
     <ThemeToggle />
 
     <main>
