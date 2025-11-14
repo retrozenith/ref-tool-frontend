@@ -15,6 +15,9 @@ const version = pkg.version;
 		<div class="footer-note">
 			Acest instrument a fost realizat de Cristea Florian Victor pentru fiecare arbitru AJF Ilfov. Verificați mereu corectitudinea rapoartelor generate de acest program web.
 		</div>
+		<div class="footer-links">
+			<a href="/termeni-si-conditii">Termeni și Condiții</a>
+		</div>
 		<div class="footer-note">
 			Găzduit de Cloudflare
 		</div>
@@ -82,6 +85,26 @@ const version = pkg.version;
 
 	.version-info:hover {
 		opacity: 1;
+	}
+
+	.footer-links {
+		margin: 0.5rem 0;
+		padding: 0;
+		text-align: center;
+		width: 100%;
+	}
+
+	.footer-links a {
+		color: var(--ui-primary);
+		text-decoration: none;
+		font-size: 0.875rem;
+		font-weight: 500;
+		transition: color 0.3s ease, text-decoration 0.3s ease;
+	}
+
+	.footer-links a:hover {
+		text-decoration: underline;
+		color: var(--ui-primary-hover);
 	}
 
 	@media (max-width: 639px) {
