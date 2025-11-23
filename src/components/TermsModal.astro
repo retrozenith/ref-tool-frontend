@@ -48,59 +48,67 @@
 </div>
 
 <script>
-  const TERMS_ACCEPTED_KEY = 'termsAccepted';
-  const TERMS_VERSION = '1.0';
-  
-  const modal = document.getElementById('termsModal');
-  const acceptCheckbox = document.getElementById('acceptTerms') as HTMLInputElement;
-  const acceptButton = document.getElementById('acceptButton') as HTMLButtonElement;
-  const reportForm = document.getElementById('reportForm') as HTMLFormElement;
-  
-  // Check if terms were already accepted
-  function checkTermsAcceptance() {
-    const accepted = localStorage.getItem(TERMS_ACCEPTED_KEY);
-    if (accepted !== TERMS_VERSION && modal) {
-      modal.style.display = 'flex';
-      // Disable form submission
-      if (reportForm) {
-        reportForm.style.pointerEvents = 'none';
-        reportForm.style.opacity = '0.5';
+  document.addEventListener('DOMContentLoaded', () => {
+    const TERMS_ACCEPTED_KEY = 'termsAccepted';
+    const TERMS_VERSION = '1.0';
+    
+    const modal = document.getElementById('termsModal');
+    const acceptCheckbox = document.getElementById('acceptTerms') as HTMLInputElement;
+    const acceptButton = document.getElementById('acceptButton') as HTMLButtonElement;
+    const reportForm = document.getElementById('reportForm') as HTMLFormElement;
+    
+    // Check if terms were already accepted
+    function checkTermsAcceptance() {
+      const accepted = localStorage.getItem(TERMS_ACCEPTED_KEY);
+      if (accepted !== TERMS_VERSION && modal) {
+        modal.style.display = 'flex';
+        // Disable form submission
+        if (reportForm) {
+          reportForm.style.pointerEvents = 'none';
+          reportForm.style.opacity = '0.5';
+        }
       }
     }
-  }
-  
-  // Enable/disable accept button based on checkbox
-  acceptCheckbox?.addEventListener('change', () => {
+    
+    // Enable/disable accept button based on checkbox
+    if (acceptCheckbox) {
+      acceptCheckbox.addEventListener('change', () => {
+        if (acceptButton) {
+          acceptButton.disabled = !acceptCheckbox.checked;
+        }
+      });
+    }
+    
+    // Handle accept button click
     if (acceptButton) {
-      acceptButton.disabled = !acceptCheckbox.checked;
+      acceptButton.addEventListener('click', () => {
+        if (acceptCheckbox?.checked) {
+          localStorage.setItem(TERMS_ACCEPTED_KEY, TERMS_VERSION);
+          if (modal) {
+            modal.style.display = 'none';
+          }
+          // Enable form submission
+          if (reportForm) {
+            reportForm.style.pointerEvents = 'auto';
+            reportForm.style.opacity = '1';
+          }
+        }
+      });
     }
-  });
-  
-  // Handle accept button click
-  acceptButton?.addEventListener('click', () => {
-    if (acceptCheckbox?.checked) {
-      localStorage.setItem(TERMS_ACCEPTED_KEY, TERMS_VERSION);
-      if (modal) {
-        modal.style.display = 'none';
-      }
-      // Enable form submission
-      if (reportForm) {
-        reportForm.style.pointerEvents = 'auto';
-        reportForm.style.opacity = '1';
-      }
+    
+    // Prevent closing modal by clicking outside
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
     }
+    
+    // Check on page load
+    checkTermsAcceptance();
   });
-  
-  // Prevent closing modal by clicking outside
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  });
-  
-  // Check on page load
-  checkTermsAcceptance();
 </script>
 
 <style>
