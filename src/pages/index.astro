@@ -213,7 +213,8 @@ import '../styles/components.css';
           ageCategorySelect.innerHTML = '<option value="">Mai întâi selectează asociația</option>';
         }
         
-        // Reset dependent fields
+        // Reset dependent fields when locality changes
+        ageCategorySelect.value = '';
         updateFormFields(null);
       });
 
@@ -222,6 +223,8 @@ import '../styles/components.css';
         const field_referee_name_2 = document.getElementById('field_referee_name_2');
         const req_referee_name_2 = document.getElementById('req_referee_name_2');
         const referee_name_2_input = document.querySelector('input[name="referee_name_2"]');
+        const localitySelect = document.getElementById('locality') as HTMLSelectElement;
+        const selectedLocality = localitySelect?.value;
         
         if (!category) {
           if (u15Section) u15Section.style.display = 'none';
@@ -233,15 +236,26 @@ import '../styles/components.css';
           return;
         }
 
-        // Categories that need second referee (Ilfov U11/U13)
-        if (category === 'U11' || category === 'U13') {
+        // Categories that need second referee
+        // - Ilfov: U11, U13
+        // - FRF: U11, U12, U13 (Interliga and Liga Elitelor need 2 refs)
+        const needsSecondReferee = (
+          (selectedLocality === 'Ilfov' && (category === 'U11' || category === 'U13')) ||
+          (selectedLocality === 'frf' && (category === 'U11' || category === 'U12' || category === 'U13'))
+        );
+
+        if (needsSecondReferee) {
           if (field_referee_name_2) field_referee_name_2.style.display = 'flex';
           if (referee_name_2_input) referee_name_2_input.required = true;
           if (req_referee_name_2) req_referee_name_2.style.display = 'inline';
           if (u15Section) u15Section.style.display = 'none';
         } 
-        // Categories that show U15+ section (extended info)
-        else if (category === 'U15' || category === 'U14' || category === 'U16' || category === 'U17' || category === 'U17F' || category === 'LIGA2' || category === 'LIGA3' || category === 'LIGAT' || category === 'CN') {
+        // Categories that show U15+ section (extended info with assistant referees)
+        // - Ilfov: U15
+        // - FRF: U14, U15, U16, U17, U17F, LIGA2, LIGA3, LIGAT, CN
+        else if (category === 'U15' || category === 'U14' || category === 'U16' || category === 'U17' || 
+                 category === 'U17F' || category === 'LIGA2' || category === 'LIGA3' || 
+                 category === 'LIGAT' || category === 'CN') {
           if (field_referee_name_2) field_referee_name_2.style.display = 'none';
           if (referee_name_2_input) {
             referee_name_2_input.required = false;
@@ -249,7 +263,7 @@ import '../styles/components.css';
           }
           if (u15Section) u15Section.style.display = 'block';
         } 
-        // Other categories (U9, U12)
+        // Other categories (U9) - simple format
         else {
           if (field_referee_name_2) field_referee_name_2.style.display = 'none';
           if (referee_name_2_input) {

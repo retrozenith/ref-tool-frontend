@@ -8,7 +8,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
       </svg>
     </div>
-    <h3 class="section-title">Informații suplimentare (U15+)</h3>
+    <h3 class="section-title">Informații suplimentare</h3>
   </div>
 
   <label id="field_competition">
@@ -19,6 +19,17 @@
       name="competition" 
       type="text"
       placeholder="Introduceți numele competiției" 
+    />
+  </label>
+
+  <label id="field_locality_field_1">
+    <span class="label-text">
+      Localitatea arbitrului principal
+    </span>
+    <input 
+      name="locality_field_1" 
+      type="text"
+      placeholder="Asociație (opțional, implicit: asociația selectată)" 
     />
   </label>
 
@@ -35,6 +46,19 @@
       />
     </label>
 
+    <label id="field_locality_field_2">
+      <span class="label-text">
+        Localitatea arbitrului asistent 1
+      </span>
+      <input 
+        name="locality_field_2" 
+        type="text"
+        placeholder="Asociație (opțional, implicit: asociația selectată)" 
+      />
+    </label>
+  </div>
+
+  <div class="form-row two-col">
     <label id="field_assistant_referee_2">
       <span class="label-text">
         Arbitru asistent 2
@@ -46,19 +70,43 @@
         autocomplete="name"
       />
     </label>
+
+    <label id="field_locality_field_3">
+      <span class="label-text">
+        Localitatea arbitrului asistent 2
+      </span>
+      <input 
+        name="locality_field_3" 
+        type="text"
+        placeholder="Asociație (opțional, implicit: asociația selectată)" 
+      />
+    </label>
   </div>
 
-  <label id="field_fourth_official">
-    <span class="label-text">
-      Al 4-lea oficial
-    </span>
-    <input 
-      name="fourth_official" 
-      type="text"
-      placeholder="Numele celui de-al 4-lea oficial" 
-      autocomplete="name"
-    />
-  </label>
+  <div class="form-row two-col">
+    <label id="field_fourth_official">
+      <span class="label-text">
+        Al 4-lea oficial
+      </span>
+      <input 
+        name="fourth_official" 
+        type="text"
+        placeholder="Numele celui de-al 4-lea oficial" 
+        autocomplete="name"
+      />
+    </label>
+
+    <label id="field_locality_field_4">
+      <span class="label-text">
+        Asociație al 4-lea oficial
+      </span>
+      <input 
+        name="locality_field_4" 
+        type="text"
+        placeholder="Asociație (opțional, implicit: asociația selectată)" 
+      />
+    </label>
+  </div>
 
   <div style="background: var(--ui-card); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--ui-border); margin-top: 0.5rem;">
     <div class="section-header" style="margin-bottom: 1rem;">
