@@ -226,6 +226,13 @@ import '../styles/components.css';
         const localitySelect = document.getElementById('locality') as HTMLSelectElement;
         const selectedLocality = localitySelect?.value;
         
+        // Locality fields for referees (only for FRF)
+        const localityField1 = document.getElementById('field_locality_field_1');
+        const localityField2 = document.getElementById('field_locality_field_2');
+        const localityField3 = document.getElementById('field_locality_field_3');
+        const localityField4 = document.getElementById('field_locality_field_4');
+        const copyLocalityBtn = document.getElementById('copyLocalityBtn');
+        
         if (!category) {
           if (u15Section) u15Section.style.display = 'none';
           if (field_referee_name_2) field_referee_name_2.style.display = 'none';
@@ -262,6 +269,14 @@ import '../styles/components.css';
             referee_name_2_input.value = '';
           }
           if (u15Section) u15Section.style.display = 'block';
+          
+          // Show locality fields only for FRF
+          const isFRF = selectedLocality === 'frf';
+          if (localityField1) localityField1.style.display = isFRF ? 'flex' : 'none';
+          if (localityField2) localityField2.style.display = isFRF ? 'flex' : 'none';
+          if (localityField3) localityField3.style.display = isFRF ? 'flex' : 'none';
+          if (localityField4) localityField4.style.display = isFRF ? 'flex' : 'none';
+          if (copyLocalityBtn) copyLocalityBtn.style.display = isFRF ? 'flex' : 'none';
         } 
         // Other categories (U9) - simple format
         else {
