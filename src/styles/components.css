@@ -74,12 +74,29 @@ select option {
 input[type="date"],
 input[type="time"] {
   cursor: pointer;
+  min-height: 48px;
+  /* iOS Safari fixes */
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* iOS specific fixes for date/time inputs */
+@supports (-webkit-touch-callout: none) {
+
+  input[type="date"],
+  input[type="time"] {
+    min-height: 48px;
+    line-height: 1.5;
+  }
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(0.7) sepia(1) saturate(0.5) hue-rotate(175deg);
   cursor: pointer;
+  opacity: 0.7;
 }
 
 /* ============================================
