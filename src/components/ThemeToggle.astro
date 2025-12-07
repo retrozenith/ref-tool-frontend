@@ -1,49 +1,12 @@
 ---
+// Theme toggle is hidden in this dark-mode-first design
+// Keeping the component for potential future light mode support
 ---
 
-<button class="theme-toggle" id="themeToggle" aria-label="Comutare temă">
-  <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-  </svg>
-  <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-  </svg>
-</button>
-
-<script>
-  const themeToggle = document.getElementById('themeToggle');
-  const htmlElement = document.documentElement;
-  
-  const getSavedTheme = () => {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved;
-    
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  };
-
-  const setTheme = (theme) => {
-    htmlElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  };
-
-  const toggleTheme = () => {
-    const currentTheme = htmlElement.getAttribute('data-theme') || getSavedTheme();
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-  };
-
-  setTheme(getSavedTheme());
-
-  themeToggle?.addEventListener('click', toggleTheme);
-
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
-    });
-  }
-</script>
+<div class="theme-toggle" style="display: none;">
+  <button id="themeToggle" aria-label="Comutare temă">
+    <svg class="icon-sun" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+  </button>
+</div>

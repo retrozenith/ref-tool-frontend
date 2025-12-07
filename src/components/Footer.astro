@@ -8,125 +8,98 @@ const version = pkg.version;
 ---
 
 <footer>
-	<div class="footer-content">
-		<div class="copyright">
-			&copy; 2024-{today.getFullYear()} Cristea Florian-Victor. Toate drepturile rezervate.
-		</div>
-		<div class="footer-note">
-			Acest instrument a fost realizat de Cristea Florian Victor pentru fiecare arbitru AJF Ilfov. Verificați mereu corectitudinea rapoartelor generate de acest program web.
-		</div>
-		<div class="footer-links">
-			<a href="/termeni-si-conditii">Termeni și Condiții</a>
-		</div>
-		<div class="footer-note">
-			Găzduit de Cloudflare
-		</div>
-		<div class="version-info">
-			v{version} · {gitHash}
-		</div>
-	</div>
+  <div class="footer-divider"></div>
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="/termeni-si-conditii">Termeni și Condiții</a>
+    </div>
+    <p class="footer-note">
+      Acest instrument a fost realizat pentru arbitrii AJF Ilfov.<br />
+      Verificați mereu corectitudinea rapoartelor generate.
+    </p>
+    <p class="copyright">
+      &copy; 2024-{today.getFullYear()} Cristea Florian-Victor
+    </p>
+    <div class="version-info">
+      v{version} · {gitHash.slice(0, 7)}
+    </div>
+  </div>
 </footer>
 
 <style>
-	footer {
-		width: 100%;
-		padding: clamp(2rem, 4vw, 3rem) 0;
-		background: var(--ui-card);
-		border-top: 1px solid var(--ui-border);
-		margin-top: auto;
-		transition: background-color 0.3s ease, border-color 0.3s ease;
-	}
+  footer {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+  }
 
-	.footer-content {
-		max-width: 1400px;
-		width: 100%;
-		margin: 0 auto;
-		padding: 0 clamp(1rem, 3vw, 2rem);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.5rem;
-	}
+  .footer-divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-steel), transparent);
+    margin: 0 auto var(--spacing-xl);
+  }
 
-	.copyright {
-		margin: 0;
-		padding: 0;
-		font-size: 0.9375rem;
-		font-weight: 500;
-		color: var(--ui-text);
-		transition: color 0.3s ease;
-		text-align: center;
-		width: 100%;
-	}
+  .footer-content {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
 
-	.footer-note {
-		margin: 0;
-		padding: 0;
-		font-size: 0.875rem;
-		color: var(--ui-muted);
-		transition: color 0.3s ease;
-		line-height: 1.6;
-		text-align: center;
-		width: 100%;
-		max-width: 800px;
-	}
+  .footer-links {
+    margin-bottom: var(--spacing-sm);
+  }
 
-	.version-info {
-		margin: 0.25rem 0 0;
-		padding: 0;
-		font-size: 0.75rem;
-		color: var(--ui-muted);
-		font-family: 'Monaco', 'Courier New', monospace;
-		opacity: 0.7;
-		transition: color 0.3s ease, opacity 0.3s ease;
-		text-align: center;
-		width: 100%;
-	}
+  .footer-links a {
+    color: var(--color-sky);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
 
-	.version-info:hover {
-		opacity: 1;
-	}
+  .footer-links a:hover {
+    color: var(--color-light);
+    text-decoration: underline;
+  }
 
-	.footer-links {
-		margin: 0.5rem 0;
-		padding: 0;
-		text-align: center;
-		width: 100%;
-	}
+  .footer-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
 
-	.footer-links a {
-		color: var(--ui-primary);
-		text-decoration: none;
-		font-size: 0.875rem;
-		font-weight: 500;
-		transition: color 0.3s ease, text-decoration 0.3s ease;
-	}
+  .copyright {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
 
-	.footer-links a:hover {
-		text-decoration: underline;
-		color: var(--ui-primary-hover);
-	}
+  .version-info {
+    font-size: var(--font-size-xs);
+    color: var(--color-navy);
+    font-family: 'Monaco', 'Courier New', monospace;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+  }
 
-	@media (max-width: 639px) {
-		footer {
-			padding: 1.5rem 0;
-		}
-		
-		.footer-content {
-			padding: 0 1rem;
-		}
+  .version-info:hover {
+    opacity: 1;
+    color: var(--color-text-muted);
+  }
 
-		.copyright {
-			font-size: 0.875rem;
-			line-height: 1.5;
-		}
+  @media (max-width: 640px) {
+    footer {
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
 
-		.footer-note {
-			font-size: 0.8125rem;
-		}
-
-		.version-info {
-			font-size: 0.6875rem;
-		}
-	}
+    .footer-note {
+      font-size: var(--font-size-xs);
+    }
+  }
 </style>

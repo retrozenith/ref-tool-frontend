@@ -1,140 +1,289 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+/**
+ * Global CSS - Stormy Morning Theme with Glassmorphism
+ * Palette: #6A89A7 (Steel), #BDDDFC (Light), #88BDF2 (Sky), #384959 (Navy)
  */
 
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+  /* Stormy Morning Palette */
+  --color-steel: #6A89A7;
+  --color-light: #BDDDFC;
+  --color-sky: #88BDF2;
+  --color-navy: #384959;
+  
+  /* Derived colors */
+  --color-bg-deep: #0d1318;
+  --color-bg-main: #121a24;
+  --color-bg-card: rgba(56, 73, 89, 0.35);
+  --color-bg-input: rgba(56, 73, 89, 0.5);
+  
+  /* Text colors */
+  --color-text-primary: #BDDDFC;
+  --color-text-secondary: #8ba3bd;
+  --color-text-muted: #6A89A7;
+  
+  /* Border colors */
+  --color-border: rgba(106, 137, 167, 0.25);
+  --color-border-hover: rgba(136, 189, 242, 0.4);
+  --color-border-focus: rgba(189, 221, 252, 0.5);
+  
+  /* Effects */
+  --glow-primary: 0 0 20px rgba(136, 189, 242, 0.25);
+  --glow-strong: 0 0 30px rgba(136, 189, 242, 0.4);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-input: 0 2px 8px rgba(0, 0, 0, 0.2);
+  
+  /* Glass effect */
+  --glass-blur: blur(20px);
+  --glass-bg: rgba(56, 73, 89, 0.3);
+  
+  /* Status colors */
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
 }
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background: var(--color-bg-main);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+
+/* Animated gradient background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(106, 137, 167, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(136, 189, 242, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(56, 73, 89, 0.2) 0%, transparent 70%);
+  background-size: 200% 200%;
+  animation: gradientShift 20s ease infinite;
+  pointer-events: none;
+  z-index: -1;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+
 h1 {
-	font-size: 3.052em;
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-light), var(--color-sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
 h2 {
-	font-size: 2.441em;
+  font-size: var(--font-size-2xl);
+  color: var(--color-light);
 }
+
 h3 {
-	font-size: 1.953em;
+  font-size: var(--font-size-xl);
 }
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
+
 p {
-	margin-bottom: 1em;
+  color: var(--color-text-secondary);
 }
-.prose p {
-	margin-bottom: 2em;
+
+a {
+  color: var(--color-sky);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
+
+a:hover {
+  color: var(--color-light);
 }
-input {
-	font-size: 16px;
+
+strong {
+  font-weight: 600;
+  color: var(--color-text-primary);
 }
-table {
-	width: 100%;
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+main {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
 }
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
+
+@media (max-width: 640px) {
+  main {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+  
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
 }
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
 }
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
+
+.glass-subtle {
+  background: rgba(56, 73, 89, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(106, 137, 167, 0.15);
+  border-radius: var(--radius-lg);
 }
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-light), var(--color-sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(136, 189, 242, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(136, 189, 242, 0.4); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-steel);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection {
+  background: rgba(136, 189, 242, 0.3);
+  color: var(--color-light);
 }

@@ -52,14 +52,16 @@ import '../styles/components.css';
             <ErrorDisplay />
 
             <div class="form-section-content muted">
-              <button type="submit" id="submitBtn" style="margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
-                <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                <span id="buttonText">Generează raport PDF</span>
+              <button type="submit" id="submitBtn" style="margin: 0 auto; display: block;">
+                <span id="buttonText" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                  <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Generează raport PDF
+                </span>
               </button>
               
-              <p style="text-align: center; font-size: 0.875rem; color: var(--ui-muted); margin: 1rem 0 0;">
+              <p style="text-align: center; font-size: 0.875rem; color: var(--color-text-muted); margin: 1rem 0 0;">
                 Documentul va fi generat și descărcat automat în format PDF
               </p>
 

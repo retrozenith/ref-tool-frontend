@@ -1,105 +1,59 @@
 ---
 ---
 
-<div class="form-section-content muted section-divider">
-  <div class="section-header">
-    <div class="section-icon" aria-hidden="true">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
+<div class="form-section-content">
+  <h3 class="form-section-title">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+    Informații meci
+  </h3>
+
+  <div class="form-row two-columns">
+    <div class="field">
+      <label for="match_date">
+        Data meciului <span class="required">*</span>
+      </label>
+      <input name="match_date" id="match_date" type="date" required />
     </div>
-    <h3 class="section-title">Informații meci</h3>
+
+    <div class="field">
+      <label for="starting_hour">
+        Ora de începere <span class="required">*</span>
+      </label>
+      <input name="starting_hour" id="starting_hour" type="time" required />
+    </div>
   </div>
 
-  <div class="form-row two-col">
-    <label>
-      <span class="label-text">
-        Data meciului<span class="required">*</span>
-      </span>
-      <input name="match_date" type="date" required />
-    </label>
-    <label>
-      <span class="label-text">
-        Ora de începere<span class="required">*</span>
-      </span>
-      <input name="starting_hour" type="time" required />
-    </label>
+  <div class="form-row two-columns">
+    <div class="field autocomplete-wrapper">
+      <label for="team_1">
+        Echipa gazdă <span class="required">*</span>
+      </label>
+      <input 
+        id="team_1"
+        name="team_1" 
+        type="text"
+        placeholder="Numele echipei gazdă" 
+        autocomplete="off"
+        required 
+      />
+      <div id="autocomplete_team_1" class="autocomplete-list"></div>
+    </div>
+
+    <div class="field autocomplete-wrapper">
+      <label for="team_2">
+        Echipa oaspete <span class="required">*</span>
+      </label>
+      <input 
+        id="team_2"
+        name="team_2" 
+        type="text"
+        placeholder="Numele echipei oaspete" 
+        autocomplete="off"
+        required 
+      />
+      <div id="autocomplete_team_2" class="autocomplete-list"></div>
+    </div>
   </div>
-
-  <label class="autocomplete-wrapper">
-    <span class="label-text">
-      Echipa gazdă<span class="required">*</span>
-    </span>
-    <input 
-      id="team_1"
-      name="team_1" 
-      type="text"
-      placeholder="Introduceți numele echipei gazdă" 
-      autocomplete="off"
-      required 
-    />
-    <div id="autocomplete_team_1" class="autocomplete-list"></div>
-  </label>
-
-  <label class="autocomplete-wrapper">
-    <span class="label-text">
-      Echipa oaspete<span class="required">*</span>
-    </span>
-    <input 
-      id="team_2"
-      name="team_2" 
-      type="text"
-      placeholder="Introduceți numele echipei oaspete" 
-      autocomplete="off"
-      required 
-    />
-    <div id="autocomplete_team_2" class="autocomplete-list"></div>
-  </label>
 </div>
-
-<style>
-  .autocomplete-wrapper {
-    position: relative;
-  }
-
-  .autocomplete-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #ffffff;
-    border: 1px solid var(--ui-border);
-    border-radius: 0.5rem;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    display: none;
-    margin-top: 0.25rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  }
-
-  :global([data-theme="dark"]) .autocomplete-list {
-    background: #1a1a1a;
-  }
-
-  .autocomplete-list.active {
-    display: block;
-  }
-
-  .autocomplete-item {
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-    font-size: 0.875rem;
-  }
-
-  .autocomplete-item:hover,
-  .autocomplete-item.selected {
-    background: var(--ui-primary-soft);
-    color: var(--ui-primary);
-  }
-
-  .autocomplete-item:not(:last-child) {
-    border-bottom: 1px solid var(--ui-border);
-  }
-</style>

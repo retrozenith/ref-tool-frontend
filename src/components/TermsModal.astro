@@ -4,7 +4,7 @@
 <div id="termsModal" class="modal-overlay" style="display: none;">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Termeni și Condiții</h2>
+      <h3>Termeni și Condiții</h3>
     </div>
     
     <div class="modal-body">
@@ -13,22 +13,22 @@
         vă rugăm să citiți și să acceptați termenii și condițiile.
       </p>
       
-      <h3>Puncte Importante:</h3>
-      <ul>
+      <h4 style="color: var(--color-sky); margin: 1.5rem 0 1rem; font-size: 1rem;">Puncte Importante:</h4>
+      <ul style="margin: 1rem 0; padding-left: 1.5rem; line-height: 1.8;">
         <li>Rapoartele sunt destinate <strong>AJF Ilfov</strong> și <strong>FRF</strong></li>
         <li>Sunteți responsabil pentru corectitudinea datelor introduse</li>
         <li>Trebuie să verificați fiecare raport generat înainte de trimitere</li>
-        <li><strong>Dezvoltatorul nu este responsabil pentru rapoarte defectuoase generate ca urmare a introducerii de date incorecte</strong></li>
+        <li><strong style="color: var(--color-error);">Dezvoltatorul nu este responsabil pentru rapoarte defectuoase generate ca urmare a introducerii de date incorecte</strong></li>
       </ul>
       
       <p>
         Pentru detalii complete, consultați 
-        <a href="/termeni-si-conditii" target="_blank" style="color: var(--ui-primary); text-decoration: underline;">
+        <a href="/termeni-si-conditii" target="_blank">
           pagina completă de Termeni și Condiții
         </a>.
       </p>
       
-      <div class="checkbox-container">
+      <div class="terms-checkbox">
         <label>
           <input type="checkbox" id="acceptTerms" />
           <span>
@@ -39,13 +39,86 @@
       </div>
     </div>
     
-    <div class="modal-footer">
-      <button type="button" id="acceptButton" class="btn-primary" disabled>
+    <div class="modal-actions">
+      <button type="button" id="acceptButton" disabled>
         Accept Termenii și Condițiile
       </button>
     </div>
   </div>
 </div>
+
+<style>
+  .modal-body {
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    flex: 1;
+    max-height: 60vh;
+  }
+  
+  .modal-body p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  
+  .modal-body li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .terms-checkbox {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: rgba(56, 73, 89, 0.3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  
+  .terms-checkbox input[type="checkbox"] {
+    appearance: auto;
+    -webkit-appearance: checkbox;
+    width: 18px;
+    height: 18px;
+    margin-top: 0.25rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: var(--color-sky);
+  }
+  
+  .terms-checkbox label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .terms-checkbox label span {
+    flex: 1;
+    line-height: 1.6;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+  
+  .modal-actions {
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  @media (max-width: 639px) {
+    .modal-body {
+      padding: var(--spacing-md);
+    }
+    
+    .modal-actions {
+      padding: var(--spacing-md);
+    }
+    
+    .terms-checkbox {
+      padding: var(--spacing-sm);
+    }
+  }
+</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -62,6 +135,7 @@
       const accepted = localStorage.getItem(TERMS_ACCEPTED_KEY);
       if (accepted !== TERMS_VERSION && modal) {
         modal.style.display = 'flex';
+        modal.classList.add('active');
         // Disable form submission
         if (reportForm) {
           reportForm.style.pointerEvents = 'none';
@@ -86,6 +160,7 @@
           localStorage.setItem(TERMS_ACCEPTED_KEY, TERMS_VERSION);
           if (modal) {
             modal.style.display = 'none';
+            modal.classList.remove('active');
           }
           // Enable form submission
           if (reportForm) {
@@ -110,159 +185,3 @@
     checkTermsAcceptance();
   });
 </script>
-
-<style>
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    backdrop-filter: blur(4px);
-  }
-  
-  .modal-content {
-    background: var(--ui-card);
-    border-radius: 12px;
-    max-width: 600px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--ui-border);
-  }
-  
-  .modal-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--ui-border);
-  }
-  
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--ui-text);
-  }
-  
-  .modal-body {
-    padding: 1.5rem;
-    overflow-y: auto;
-    flex: 1;
-    color: var(--ui-text);
-  }
-  
-  .modal-body h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin: 1.5rem 0 1rem;
-    color: var(--ui-text);
-  }
-  
-  .modal-body p {
-    line-height: 1.7;
-    margin-bottom: 1rem;
-    color: var(--ui-text);
-  }
-  
-  .modal-body ul {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-    line-height: 1.7;
-  }
-  
-  .modal-body li {
-    margin-bottom: 0.75rem;
-    color: var(--ui-text);
-  }
-  
-  .checkbox-container {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: var(--ui-background);
-    border: 1px solid var(--ui-border);
-    border-radius: 8px;
-  }
-  
-  .checkbox-container input[type="checkbox"] {
-    appearance: auto;
-    -webkit-appearance: checkbox;
-    -moz-appearance: checkbox;
-    width: 18px;
-    height: 18px;
-    margin-top: 0.25rem;
-    cursor: pointer;
-    flex-shrink: 0;
-    accent-color: var(--ui-primary);
-  }
-  
-  .checkbox-container label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .checkbox-container label span {
-    flex: 1;
-    line-height: 1.6;
-    color: var(--ui-text);
-  }
-  
-  .modal-footer {
-    padding: 1.5rem;
-    border-top: 1px solid var(--ui-border);
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .btn-primary {
-    background: var(--ui-primary);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .btn-primary:hover:not(:disabled) {
-    background: var(--ui-primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .btn-primary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  @media (max-width: 639px) {
-    .modal-content {
-      max-height: 95vh;
-    }
-    
-    .modal-header,
-    .modal-body,
-    .modal-footer {
-      padding: 1rem;
-    }
-    
-    .modal-header h2 {
-      font-size: 1.25rem;
-    }
-    
-    .checkbox-container {
-      padding: 0.75rem;
-    }
-  }
-</style>
