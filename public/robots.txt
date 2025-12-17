@@ -1,0 +1,11 @@
+# Robots.txt for ref-tool.ro
+# Allow all search engine crawlers
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://rapoarte.cristeavictor.xyz/sitemap-index.xml
+
+# Disallow admin or API paths if any
+Disallow: /api/

@@ -15,7 +15,7 @@ try {
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://example.com",
+	site: "https://rapoarte.cristeavictor.xyz",
 	integrations: [mdx(), sitemap()],
 	adapter: cloudflare({
 		platformProxy: {

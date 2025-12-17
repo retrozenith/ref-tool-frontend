@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import { SITE_KEYWORDS, SITE_AUTHOR } from '../consts';
 
 interface Props {
 	title: string;
@@ -10,8 +11,9 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteURL = Astro.site?.toString().replace(/\/$/, '') || 'https://rapoarte.cristeavictor.xyz';
 
-const { title, description } = Astro.props;
+const { title, description, image = '/favicon.svg' } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -32,3 +34,28 @@ const { title, description } = Astro.props;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="keywords" content={SITE_KEYWORDS} />
+<meta name="author" content={SITE_AUTHOR} />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="Romanian" />
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#121a24" />
+<meta name="msapplication-TileColor" content="#121a24" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={`${siteURL}${image}`} />
+<meta property="og:locale" content="ro_RO" />
+<meta property="og:site_name" content="Generator Raport Arbitraj" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={`${siteURL}${image}`} />
+

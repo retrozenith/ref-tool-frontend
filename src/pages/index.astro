@@ -20,6 +20,21 @@ import '../styles/components.css';
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Generator Raport Arbitraj",
+      "description": SITE_DESCRIPTION,
+      "url": "https://rapoarte.cristeavictor.xyz",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "author": {
+        "@type": "Person",
+        "name": "Cristea Florian-Victor"
+      }
+    })} />
   </head>
   <body>
     <TermsModal />
