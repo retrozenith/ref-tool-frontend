@@ -17,6 +17,9 @@ const version = pkg.version;
       Acest instrument a fost realizat pentru arbitrii AJF Ilfov.<br />
       Verificați mereu corectitudinea rapoartelor generate.
     </p>
+    <div class="contact-info">
+      <a href="mailto:admin@cristeavictor.xyz">admin@cristeavictor.xyz</a>
+    </div>
     <p class="copyright">
       &copy; 2024-{today.getFullYear()} Cristea Florian-Victor
     </p>
@@ -80,9 +83,26 @@ const version = pkg.version;
     margin: 0;
   }
 
+  .contact-info {
+    margin: var(--spacing-xs) 0;
+  }
+
+  .contact-info a {
+    color: var(--color-sky);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .contact-info a:hover {
+    color: var(--color-light);
+    text-decoration: underline;
+  }
+
   .version-info {
     font-size: var(--font-size-xs);
-    color: var(--color-navy);
+    color: var(--color-text-muted);
     font-family: 'Monaco', 'Courier New', monospace;
     opacity: 0.7;
     transition: opacity var(--transition-fast);
@@ -90,7 +110,7 @@ const version = pkg.version;
 
   .version-info:hover {
     opacity: 1;
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
   }
 
   @media (max-width: 640px) {
