@@ -17,11 +17,7 @@ try {
 export default defineConfig({
 	site: "https://rapoarte.cristeavictor.xyz",
 	integrations: [mdx(), sitemap()],
-	adapter: cloudflare({
-		platformProxy: {
-			enabled: true,
-		},
-	}),
+	adapter: cloudflare(),
 	vite: {
 		define: {
 			'import.meta.env.PUBLIC_GIT_HASH': JSON.stringify(gitHash),
