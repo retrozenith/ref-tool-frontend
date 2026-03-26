@@ -5,6 +5,7 @@
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
+	"main": "./dist/_worker.js/index.js",
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS"
@@ -12,6 +13,11 @@
 	"observability": {
 		"enabled": true
 	},
-	"services": [{ "binding": "API", "service": "ref-tool-worker" }],
+	"services": [
+		{
+			"binding": "API",
+			"service": "ref-tool-worker"
+		}
+	],
 	"upload_source_maps": true
 }
