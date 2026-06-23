@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^24.10.1",
-		"wrangler": "^4.76.0"
+		"wrangler": "^4.103.0"
 	},
 	"scripts": {
 		"astro": "astro",
